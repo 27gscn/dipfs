@@ -1,0 +1,305 @@
+<!DOCTYPE html><html data-theme="light"><head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="assets/7224ab5ffa303cab.png" type="image/png">
+    <link rel="shortcut icon" href="assets/7224ab5ffa303cab.png" type="image/png">
+    <title>
+                駐馬跡    </title>
+
+    <!-- 使用url函数转换相关路径 -->
+    <link rel="stylesheet" href="assets/6081358b32964657.css">
+    <link rel="stylesheet" href="assets/1054030b32339847.css">
+    <link href="assets/7492042bff3e7ac2.css" rel="stylesheet">
+
+    <style>
+        /* ===== 按钮基础 ===== */
+        .theme-switch{
+            display:inline-block;
+            margin-left:12px;
+        }
+        #darkmode{
+            background:transparent;
+            border:none;
+            cursor:pointer;
+            font-size:20px;
+            color:var(--text-color);   /* 跟随变量 */
+            transition:color .3s;
+        }
+        #darkmode:hover{
+            opacity:.8;
+        }
+        
+        
+        html { color: var(--text-color); }   /* 根节点先定调 */
+        
+        /* ===== 需要强制覆盖的再写一次 ===== */
+        .post-title,
+        .time,
+        .meta span,
+        .post .time,
+        .post a,
+        .header nav ul.flat li.active a {
+            color: var(--text-color) !important;
+        }
+        
+         html, body, h1, h2, h3, h4, h5, h6, p, a, span, div, li, ul, ol, input, textarea, button, time {
+             color:var(--text-color);
+        } 
+        /* ===== 全局变量 ===== */
+        :root,
+        [data-theme="light"]{
+            --bg-color:#ffffff;
+            --text-color:#222222;
+        }
+        [data-theme="dark"]{
+            --bg-color:#1c3b56;
+            --text-color:#ffffff;
+        }
+        body{
+            background:var(--bg-color);
+            color:var(--text-color);
+            transition:background .3s,color .3s;
+        }
+        .main{
+              background:var(--bg-color);
+            color:var(--text-color);
+            transition:background .3s,color .3s;
+        }
+        
+        a, a:visited{
+            color:var(--text-color);
+        }
+        #to_top{
+            color:#0078ff;
+        }
+
+    </style>
+    <script src="assets/0fe6d5b68d7a2f29.js"></script>
+    <!-- 通过自有函数输出HTML头部信息 -->
+    <meta name="description" content="佩玉年刊網站維護誌">
+<meta name="keywords" content="佩玉年刊，網站维护誌">
+<meta name="generator" content="Typecho 1.2.1">
+<meta name="template" content="Ying">
+<link rel="pingback" href="https://57.27.gs.cn/index.php/action/xmlrpc">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://57.27.gs.cn/index.php/action/xmlrpc?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://57.27.gs.cn/index.php/action/xmlrpc?wlw">
+<link rel="alternate" type="application/rss+xml" title="駐馬跡 » RSS 2.0" href="https://57.27.gs.cn/index.php/feed/">
+<link rel="alternate" type="application/rdf+xml" title="駐馬跡 » RSS 1.0" href="https://57.27.gs.cn/index.php/feed/rss/">
+<link rel="alternate" type="application/atom+xml" title="駐馬跡 » ATOM 1.0" href="https://57.27.gs.cn/index.php/feed/atom/">
+</head>
+
+<body><svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;"><symbol id="icon-cn" viewBox="0 0 1024 1024"><path d="M1024 512C1024 229.376 794.624 0 512 0S0 229.376 0 512s229.376 512 512 512 512-229.376 512-512zM501.76 199.68l40.96 10.24 30.72-30.72-10.24 40.96 40.96 20.48-40.96 10.24v40.96l-20.48-30.72-51.2 10.24 30.72-40.96-20.48-30.72z m-122.88 327.68L286.72 455.68l-92.16 71.68 30.72-112.64-92.16-71.68h122.88l30.72-112.64 40.96 112.64h112.64L348.16 414.72l30.72 112.64z m184.32 92.16v40.96l-20.48-30.72-51.2 10.24 30.72-40.96-20.48-30.72 40.96 10.24 30.72-30.72-10.24 40.96 40.96 20.48-40.96 10.24z m122.88-71.68l-30.72-20.48-40.96 20.48 20.48-40.96-40.96-20.48h40.96l20.48-40.96 10.24 40.96 40.96-10.24-30.72 30.72 10.24 40.96z m-20.48-184.32l-20.48 40.96v-40.96l-51.2-10.24 40.96-20.48v-40.96l30.72 30.72 40.96-20.48-30.72 40.96 40.96 30.72-51.2-10.24z" fill="#E50012"></path><path d="M327.68 343.04l-40.96-112.64-30.72 112.64H133.12l92.16 71.68-30.72 112.64 92.16-71.68 92.16 71.68-30.72-112.64 92.16-71.68zM542.72 261.12l20.48 30.72v-40.96l40.96-10.24-40.96-20.48 10.24-40.96-30.72 30.72-40.96-10.24 20.48 30.72-30.72 40.96zM706.56 302.08l-40.96 20.48-30.72-30.72v40.96l-40.96 20.48 51.2 10.24v40.96l20.48-40.96 51.2 10.24-40.96-30.72zM665.6 486.4l-10.24-40.96-20.48 40.96h-40.96l40.96 20.48-20.48 40.96 40.96-20.48 30.72 20.48-10.24-40.96 30.72-30.72zM573.44 547.84l-30.72 30.72-40.96-10.24 20.48 30.72-30.72 40.96 51.2-10.24 20.48 30.72v-40.96l40.96-10.24-40.96-20.48z" fill="#FFF000"></path></symbol></svg>
+    <div class="main">
+        <div class="container">
+            <div class="header">
+                <img src="assets/0a236a3d21982c2b.png" width="80" height="80" alt="駐馬跡">
+                <div class="site-description">
+                    <h2><span>
+                            佩玉廿七 (27.GS.CN) 網站維護誌                        </span></h2>
+                    <nav class="nav social">
+                        <ul class="flat">
+                            <!-- ✅ 链接已改为 27.gs.cn/category/57 ，FEED 按钮已移除 -->
+                            <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F27.gs.cn%2Findex.php%2Fcategory%2F57%2F" target="_top" title="探駐馬跡" target="_blank">探駐馬跡</a>
+                            <li class="theme-switch">
+                                <button id="darkmode" type="button" title="浅色和深色模式转换">
+                                    <i class="ri-contrast-line"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+               <script>
+                    (function(){
+                        const key = 'theme-pref';
+                        let stored = localStorage.getItem(key) || 'light';
+                        document.documentElement.setAttribute('data-theme', stored);
+                    
+                        document.getElementById('darkmode').addEventListener('click', function(){
+                            const current = document.documentElement.getAttribute('data-theme');
+                            const next = current === 'dark' ? 'light' : 'dark';
+                            document.documentElement.setAttribute('data-theme', next);
+                            localStorage.setItem(key, next);
+                        });
+                    })();
+                    </script>
+
+<style>
+/* ✅ 樣式：純文章列表（已刪除首頁導航） */
+
+/* 文章項 */
+.post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px 0;
+  border-bottom: 1px solid #eee;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+/* 標題文字 */
+.post a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1; /* 撐滿左側空間，日期靠右 */
+}
+
+/* 日期文字 */
+.post .time {
+  color: #000;
+  font-size: 1em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 懸停特效 */
+.post:hover {
+  transform: scale(1.03);
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.post:hover a,
+.post:hover .time {
+  color: #0078ff;
+}
+
+/* ===== 文章列表：沉稳风格（支持浅/深色） ===== */
+
+/* 主题变量 */
+:root,
+[data-theme="light"]{
+  --bg-color:#ffffff;
+  --text-color:#222222;
+
+  --hover-bg:#f6f7f9;
+  --hover-shadow:0 2px 8px rgba(0,0,0,0.10);
+  --accent:#2b6cb0;
+  --border-color:#eee;
+}
+
+[data-theme="dark"]{
+  --bg-color:#1c3b56;
+  --text-color:#ffffff;
+
+  /* 更沉稳：低对比、低饱和 */
+  --hover-bg:rgba(255,255,255,0.04);
+  --hover-shadow:0 2px 10px rgba(0,0,0,0.40);
+  --accent:rgba(210,230,255,0.85);
+  --border-color:rgba(255,255,255,0.10);
+}
+
+/* 文章项 */
+.post{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1px 0;
+  border-bottom:1px solid var(--border-color);
+  cursor:pointer;
+  transition:transform .2s ease, background-color .2s ease, box-shadow .2s ease, color .2s ease;
+}
+
+/* 标题文字 */
+.post a{
+  text-decoration:none;
+  color:var(--text-color);
+  font-weight:500;
+  font-size:1em;
+  margin:0;
+  padding:0;
+  flex-grow:1;
+}
+
+/* 日期文字 */
+.post .time{
+  color:var(--text-color);
+  font-size:1em;
+  font-weight:500;
+  white-space:nowrap;
+}
+
+/* 悬停特效（更沉稳） */
+.post:hover{
+  transform:scale(1.01);
+  background-color:var(--hover-bg);
+  box-shadow:var(--hover-shadow);
+}
+
+.post:hover a,
+.post:hover .time{
+  color:var(--accent);
+}
+
+/* 移动端避免“伪悬停” */
+@media (hover: none){
+  .post:hover{
+    transform:none;
+    box-shadow:none;
+  }
+}
+
+
+</style>
+
+<article>
+  <div class="recent-posts section">
+          <div class="post" onclick="window.location='https://57.27.gs.cn/index.php/2026/08/14/67.html'">
+        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F67.html" target="_top">當時存跡DIPFS觸發存檔測試叁次—丙午七月初二</a>
+        <div class="time">2026-08-14 17:30</div>
+      </div>
+          <div class="post" onclick="window.location='https://57.27.gs.cn/index.php/2026/08/14/66.html'">
+        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F66.html" target="_top">當時存跡DIPFS觸發存檔測試贰次—丙午七月初二</a>
+        <div class="time">2026-08-14 17:17</div>
+      </div>
+          <div class="post" onclick="window.location='https://57.27.gs.cn/index.php/2026/08/14/65.html'">
+        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F65.html" target="_top">當時存跡DIPFS觸發存檔測試—丙午七月初二</a>
+        <div class="time">2026-08-14 13:42</div>
+      </div>
+          <div class="post" onclick="window.location='https://57.27.gs.cn/index.php/2026/02/02/64.html'">
+        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F02%2F02%2F64.html" target="_top">佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容贰次更新[补正]於乙巳腊月十五</a>
+        <div class="time">2026-02-02 01:44</div>
+      </div>
+          <div class="post" onclick="window.location='https://57.27.gs.cn/index.php/2026/01/19/63.html'">
+        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F19%2F63.html" target="_top">度器命—类属—增站点类属於乙巳腊月初一</a>
+        <div class="time">2026-01-19 11:13</div>
+      </div>
+          <div class="post" onclick="window.location='https://57.27.gs.cn/index.php/2026/01/14/62.html'">
+        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F14%2F62.html" target="_top">佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容壹次更新[补正]於乙巳冬月廿六</a>
+        <div class="time">2026-01-14 10:30</div>
+      </div>
+          <div class="post" onclick="window.location='https://57.27.gs.cn/index.php/2026/01/13/61.html'">
+        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F61.html" target="_top">佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容壹次更新於乙巳冬月廿五</a>
+        <div class="time">2026-01-13 17:35</div>
+      </div>
+      </div>
+</article>
+
+<ul class="pagination">
+  <li class="page-item page-previous">
+    <a class="next" title="" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2Fpage%2F2%2F" target="_top">下一页</a>  </li>
+  <li class="page-item page-next">
+      </li>
+</ul>
+
+
+<a id="to_top" href="#" class="to_top" style="display: block;"><i class="ri-arrow-up-line"></i></a> 
+            <div class="footer">
+                 <nav class="nav">
+                 © 2017 - 2026 @<a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F27.gs.cn" target="_top"> 佩玉廿七 </a>· <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F27.gs.cn%2Findex.php%2F2025%2F10%2F16%2F251016.html" target="_top" target="_blank" rel="noopener">關於站點</a><br>
+                <a href="https://beian.miit.gov.cn/" target="_blank"><span>陇ICP备2024006021号</span></a><br>
+
+                 </nav>
+            </div>
+        </div>
+    </div>
+    <script src="assets/5ff0a73606f657f7.js"></script>
+    <script src="assets/d24c9743e159b0fd.js"></script>
+
+
+</div></body></html>
