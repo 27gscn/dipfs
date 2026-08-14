@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 · 福佳廿七 夢想連綫修復檔案</title>
+<style>
+:root{--bg:#0d0f14;--line:#232936;--ink:#e8e6e1;--dim:#8b93a5;--gold:#d4af6a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'IBM Plex Mono','Noto Sans SC','Segoe UI',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;align-items:center;justify-content:center}
+.wrap{max-width:680px;padding:48px 32px;text-align:center}
+.code{font-size:7rem;font-weight:600;letter-spacing:.08em;line-height:1;background:linear-gradient(135deg,var(--gold),#fff 60%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.divider{width:64px;height:1px;background:var(--line);margin:28px auto}
+.report{font-size:1.05rem;line-height:2;color:var(--ink)}
+.note{margin-top:16px;font-size:.82rem;color:var(--dim)}
+.egg{margin-top:22px;font-size:.95rem;color:var(--gold);opacity:.85;min-height:1.4em;line-height:1.7}
+.btn{display:inline-block;margin-top:30px;padding:10px 30px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.9rem;transition:.2s}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.brand{margin-top:42px;font-size:.72rem;letter-spacing:.35em;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="code">404</div>
+  <div class="divider"></div>
+  <p class="report">
+    ｡ﾟ(ﾟ≧□≦ﾟ)ﾟ｡呈報：您好，依據您的反饋，該頁面被納入夢想連綫修復檔案!n(*≧▽≦*)n
+  </p>
+  <p class="note">福佳廿七 · 所訪之頁未能尋得，已錄入修復清單</p>
+  <p class="egg" id="egg"></p>
+  <a class="btn" href="/">返回首頁</a>
+  <div class="brand">福佳廿七 · 277.27.GS.CN</div>
+</div>
+<script>
+(function(){
+  var eggs = [
+    '雲深不知處，此路不通行。',
+    '眾裡尋他千百度，驀然回首，那頁卻在斷線處。',
+    '廿七號門牌：此頁已離家出走。',
+    '修復小隊已出動，檔案編號 277-404-027。',
+    '｡ﾟ(ﾟ´ω`ﾟ)ﾟ｡ 頁面說：我在迷宮裡走丟了。',
+    '山重水複疑無路，柳暗花明又一村。',
+    '伺服器輕輕嘆了一口氣。',
+    '404 號檔案，已歸入夢想連綫修復檔案庫。',
+    '本頁去遠方旅行了，歸期未知。',
+    '前不見古人，後不見來者，唯有此頁 404。',
+    'ʕ •ᴥ•ʔ 一隻熊路過，什麼也沒說。',
+    '₍ᐢ..ᐢ₎ 貓咪踩過鍵盤，頁面就消失了。',
+    '頁面在謎霧中，連線正在重新編織。',
+    '此地無頁勝有頁。',
+    '有人敲了敲門，發現 404 住在這裡。',
+    '莫愁前路無知己，此頁歸檔已錄入。',
+    '海內存知己，天涯若比鄰——唯此頁失聯。',
+    '連線斷在第七橋，修復師正在趕路。',
+    '你找到了隱藏關卡：404 號秘境。',
+    '此頁已化作星光，留於夜空中。'
+  ];
+  var el = document.getElementById('egg');
+  if (el) { el.textContent = '· ' + eggs[Math.floor(Math.random() * eggs.length)]; }
+})();
+</script>
+</body>
+</html>
