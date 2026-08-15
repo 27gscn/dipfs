@@ -1,0 +1,333 @@
+<!DOCTYPE html><html data-theme="light"><head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="assets/7224ab5ffa303cab.png" type="image/png">
+    <link rel="shortcut icon" href="assets/7224ab5ffa303cab.png" type="image/png">
+    <title>
+                駐馬跡    </title>
+
+    <!-- 使用url函数转换相关路径 -->
+    <link rel="stylesheet" href="assets/6081358b32964657.css">
+    <link rel="stylesheet" href="assets/1054030b32339847.css">
+    <link href="assets/7492042bff3e7ac2.css" rel="stylesheet">
+
+    <style>
+        /* ===== 按钮基础 ===== */
+        .theme-switch{
+            display:inline-block;
+            margin-left:12px;
+        }
+        #darkmode{
+            background:transparent;
+            border:none;
+            cursor:pointer;
+            font-size:20px;
+            color:var(--text-color);   /* 跟随变量 */
+            transition:color .3s;
+        }
+        #darkmode:hover{
+            opacity:.8;
+        }
+        
+        
+        html { color: var(--text-color); }   /* 根节点先定调 */
+        
+        /* ===== 需要强制覆盖的再写一次 ===== */
+        .post-title,
+        .time,
+        .meta span,
+        .post .time,
+        .post a,
+        .header nav ul.flat li.active a {
+            color: var(--text-color) !important;
+        }
+        
+         html, body, h1, h2, h3, h4, h5, h6, p, a, span, div, li, ul, ol, input, textarea, button, time {
+             color:var(--text-color);
+        } 
+        /* ===== 全局变量 ===== */
+        :root,
+        [data-theme="light"]{
+            --bg-color:#ffffff;
+            --text-color:#222222;
+        }
+        [data-theme="dark"]{
+            --bg-color:#1c3b56;
+            --text-color:#ffffff;
+        }
+        body{
+            background:var(--bg-color);
+            color:var(--text-color);
+            transition:background .3s,color .3s;
+        }
+        .main{
+              background:var(--bg-color);
+            color:var(--text-color);
+            transition:background .3s,color .3s;
+        }
+        
+        a, a:visited{
+            color:var(--text-color);
+        }
+        #to_top{
+            color:#0078ff;
+        }
+
+    </style>
+    <script src="assets/0fe6d5b68d7a2f29.js"></script>
+    <!-- 通过自有函数输出HTML头部信息 -->
+    <meta name="generator" content="Typecho 1.2.1">
+<meta name="template" content="Ying">
+<link rel="pingback" href="https://57.27.gs.cn/index.php/action/xmlrpc">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://57.27.gs.cn/index.php/action/xmlrpc?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://57.27.gs.cn/index.php/action/xmlrpc?wlw">
+<link rel="alternate" type="application/rss+xml" title="駐馬跡 » RSS 2.0" href="https://57.27.gs.cn/index.php/feed/3.html">
+<link rel="alternate" type="application/rdf+xml" title="駐馬跡 » RSS 1.0" href="https://57.27.gs.cn/index.php/feed/rss/3.html">
+<link rel="alternate" type="application/atom+xml" title="駐馬跡 » ATOM 1.0" href="https://57.27.gs.cn/index.php/feed/atom/3.html">
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-page-3'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-page-3'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+<script type="text/javascript">
+(function () {
+    var event = document.addEventListener ? {
+        add: 'addEventListener',
+        triggers: ['scroll', 'mousemove', 'keyup', 'touchstart'],
+        load: 'DOMContentLoaded'
+    } : {
+        add: 'attachEvent',
+        triggers: ['onfocus', 'onmousemove', 'onkeyup', 'ontouchstart'],
+        load: 'onload'
+    }, added = false;
+
+    document[event.add](event.load, function () {
+        var r = document.getElementById('respond-page-3'),
+            input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = '_';
+        input.value = (function () {
+    var _nUF = //'ycQ'
+'269'+//'lDo'
+'e12'+/* 'UV'//'UV' */''+'F'//'F'
++'0f'//'ev1'
++'f3'//'7g'
++'658'//'h'
++'f0'//'3x'
++//'7'
+'9a'+//'L'
+'6fc'+'1e7'//'OoC'
++'2'//'m6S'
++//'4'
+'4'+'b'//'X'
++//'pz'
+'94e'+'825'//'Z'
++''///*'w'*/'w'
++'cD1'//'cD1'
++'d'//'xQI'
+, _yQx = [[6,7],[24,25],[31,34]];
+    
+    for (var i = 0; i < _yQx.length; i ++) {
+        _nUF = _nUF.substring(0, _yQx[i][0]) + _nUF.substring(_yQx[i][1]);
+    }
+
+    return _nUF;
+})();
+
+        if (null != r) {
+            var forms = r.getElementsByTagName('form');
+            if (forms.length > 0) {
+                function append() {
+                    if (!added) {
+                        forms[0].appendChild(input);
+                        added = true;
+                    }
+                }
+            
+                for (var i = 0; i < event.triggers.length; i ++) {
+                    var trigger = event.triggers[i];
+                    document[event.add](trigger, append);
+                    window[event.add](trigger, append);
+                }
+            }
+        }
+    });
+})();
+</script></head>
+
+<body><svg aria-hidden="true" style="position: absolute; width: 0px; height: 0px; overflow: hidden;"><symbol id="icon-cn" viewBox="0 0 1024 1024"><path d="M1024 512C1024 229.376 794.624 0 512 0S0 229.376 0 512s229.376 512 512 512 512-229.376 512-512zM501.76 199.68l40.96 10.24 30.72-30.72-10.24 40.96 40.96 20.48-40.96 10.24v40.96l-20.48-30.72-51.2 10.24 30.72-40.96-20.48-30.72z m-122.88 327.68L286.72 455.68l-92.16 71.68 30.72-112.64-92.16-71.68h122.88l30.72-112.64 40.96 112.64h112.64L348.16 414.72l30.72 112.64z m184.32 92.16v40.96l-20.48-30.72-51.2 10.24 30.72-40.96-20.48-30.72 40.96 10.24 30.72-30.72-10.24 40.96 40.96 20.48-40.96 10.24z m122.88-71.68l-30.72-20.48-40.96 20.48 20.48-40.96-40.96-20.48h40.96l20.48-40.96 10.24 40.96 40.96-10.24-30.72 30.72 10.24 40.96z m-20.48-184.32l-20.48 40.96v-40.96l-51.2-10.24 40.96-20.48v-40.96l30.72 30.72 40.96-20.48-30.72 40.96 40.96 30.72-51.2-10.24z" fill="#E50012"></path><path d="M327.68 343.04l-40.96-112.64-30.72 112.64H133.12l92.16 71.68-30.72 112.64 92.16-71.68 92.16 71.68-30.72-112.64 92.16-71.68zM542.72 261.12l20.48 30.72v-40.96l40.96-10.24-40.96-20.48 10.24-40.96-30.72 30.72-40.96-10.24 20.48 30.72-30.72 40.96zM706.56 302.08l-40.96 20.48-30.72-30.72v40.96l-40.96 20.48 51.2 10.24v40.96l20.48-40.96 51.2 10.24-40.96-30.72zM665.6 486.4l-10.24-40.96-20.48 40.96h-40.96l40.96 20.48-20.48 40.96 40.96-20.48 30.72 20.48-10.24-40.96 30.72-30.72zM573.44 547.84l-30.72 30.72-40.96-10.24 20.48 30.72-30.72 40.96 51.2-10.24 20.48 30.72v-40.96l40.96-10.24-40.96-20.48z" fill="#FFF000"></path></symbol></svg>
+    <div class="main">
+        <div class="container">
+            <div class="header">
+                <img src="assets/0a236a3d21982c2b.png" width="80" height="80" alt="駐馬跡">
+                <div class="site-description">
+                    <h2><span>
+                            佩玉廿七 (27.GS.CN) 網站維護誌                        </span></h2>
+                    <nav class="nav social">
+                        <ul class="flat">
+                            <!-- ✅ 链接已改为 27.gs.cn/category/57 ，FEED 按钮已移除 -->
+                            <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F27.gs.cn%2Findex.php%2Fcategory%2F57%2F" target="_top" title="探駐馬跡" target="_blank">探駐馬跡</a>
+                            <li class="theme-switch">
+                                <button id="darkmode" type="button" title="浅色和深色模式转换">
+                                    <i class="ri-contrast-line"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+               <script>
+                    (function(){
+                        const key = 'theme-pref';
+                        let stored = localStorage.getItem(key) || 'light';
+                        document.documentElement.setAttribute('data-theme', stored);
+                    
+                        document.getElementById('darkmode').addEventListener('click', function(){
+                            const current = document.documentElement.getAttribute('data-theme');
+                            const next = current === 'dark' ? 'light' : 'dark';
+                            document.documentElement.setAttribute('data-theme', next);
+                            localStorage.setItem(key, next);
+                        });
+                    })();
+                    </script>
+<nav class="nav">
+<ul class="flat">
+<li class="active"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2F" target="_top">首页</a></li>
+    <li class="active"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2Fstart-page.html" target="_top">关于</a></li> <li class="active"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F3.html" target="_top"></a></li> </ul>
+                </nav>
+            </div>
+        <h1 class="post-title" itemprop="name headline">
+                    </h1>
+    <div class="post-content" itemprop="articleBody">
+            <ul>
+                                                
+                    <li class="archives-item">
+                        <div class="archives-item-content">
+                            <h3 class="archives-item-title"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F08%2F" target="_top">2026 年 08 月</a></h3>
+                            <p><span class="archives-time">08-14</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F67.html" target="_top" title="當時存跡DIPFS觸發存檔測試叁次—丙午七月初二">當時存跡DIPFS觸發存檔測試叁次—丙午七月初二</a></p><p><span class="archives-time">08-14</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F66.html" target="_top" title="當時存跡DIPFS觸發存檔測試贰次—丙午七月初二">當時存跡DIPFS觸發存檔測試贰次—丙午七月初二</a></p><p><span class="archives-time">08-14</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F65.html" target="_top" title="當時存跡DIPFS觸發存檔測試—丙午七月初二">當時存跡DIPFS觸發存檔測試—丙午七月初二</a></p>    
+                        </div>
+                    </li>
+                                
+                    <li class="archives-item">
+                        <div class="archives-item-content">
+                            <h3 class="archives-item-title"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F02%2F" target="_top">2026 年 02 月</a></h3>
+                            <p><span class="archives-time">02-02</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F02%2F02%2F64.html" target="_top" title="佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容贰次更新[补正]於乙巳腊月十五">佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容贰次更新[补正]於乙巳腊月十五</a></p>    
+                        </div>
+                    </li>
+                                
+                    <li class="archives-item">
+                        <div class="archives-item-content">
+                            <h3 class="archives-item-title"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F" target="_top">2026 年 01 月</a></h3>
+                            <p><span class="archives-time">01-19</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F19%2F63.html" target="_top" title="度器命—类属—增站点类属於乙巳腊月初一">度器命—类属—增站点类属於乙巳腊月初一</a></p><p><span class="archives-time">01-14</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F14%2F62.html" target="_top" title="佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容壹次更新[补正]於乙巳冬月廿六">佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容壹次更新[补正]於乙巳冬月廿六</a></p><p><span class="archives-time">01-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F61.html" target="_top" title="佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容壹次更新於乙巳冬月廿五">佩玉廿七 (27.GS.CN) 網站法律聲明—文本—內容壹次更新於乙巳冬月廿五</a></p><p><span class="archives-time">01-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F60.html" target="_top" title="關於站點—页面—內容叁次修正於乙巳冬月廿五">關於站點—页面—內容叁次修正於乙巳冬月廿五</a></p><p><span class="archives-time">01-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F59.html" target="_top" title="關於站點—文本—內容叁次修正於乙巳冬月廿五">關於站點—文本—內容叁次修正於乙巳冬月廿五</a></p><p><span class="archives-time">01-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F57.html" target="_top" title="站點迭代録—文本—內容壹次修正於乙巳冬月廿五">站點迭代録—文本—內容壹次修正於乙巳冬月廿五</a></p><p><span class="archives-time">01-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F54.html" target="_top" title="福佳廿七表—文本—內容壹次修正於乙巳冬月廿五">福佳廿七表—文本—內容壹次修正於乙巳冬月廿五</a></p><p><span class="archives-time">01-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F52.html" target="_top" title="探駐馬跡録—文本—內容贰次修正於乙巳冬月廿五">探駐馬跡録—文本—內容贰次修正於乙巳冬月廿五</a></p><p><span class="archives-time">01-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F13%2F51.html" target="_top" title="黛子 / 乙巳蛇年至丙午马年—文本—內容叁次更改於乙巳冬月廿五">黛子 / 乙巳蛇年至丙午马年—文本—內容叁次更改於乙巳冬月廿五</a></p><p><span class="archives-time">01-12</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F12%2F48.html" target="_top" title="过江客—文本—內容壹次更迁於乙巳冬月廿四">过江客—文本—內容壹次更迁於乙巳冬月廿四</a></p><p><span class="archives-time">01-12</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F12%2F46.html" target="_top" title="佩玉廿七程序規範—文本—內容壹次更改於乙巳冬月廿四">佩玉廿七程序規範—文本—內容壹次更改於乙巳冬月廿四</a></p><p><span class="archives-time">01-08</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2026%2F01%2F08%2F01217.html" target="_top" title="高第—类属—增站点类属於乙巳年十一月廿">高第—类属—增站点类属於乙巳年十一月廿</a></p>    
+                        </div>
+                    </li>
+                                
+                    <li class="archives-item">
+                        <div class="archives-item-content">
+                            <h3 class="archives-item-title"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F12%2F" target="_top">2025 年 12 月</a></h3>
+                            <p><span class="archives-time">12-09</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F12%2F09%2F44.html" target="_top" title=" 迷 路 3/6 逐兔篝火夜 &lt; 雪 都 &gt;—文本—內容壹次修正於乙巳十月二十"> 迷 路 3/6 逐兔篝火夜 &lt; 雪 都 &gt;—文本—內容壹次修正於乙巳十月二十</a></p>    
+                        </div>
+                    </li>
+                                
+                    <li class="archives-item">
+                        <div class="archives-item-content">
+                            <h3 class="archives-item-title"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F11%2F" target="_top">2025 年 11 月</a></h3>
+                            <p><span class="archives-time">11-22</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F11%2F22%2F42.html" target="_top" title="站點名称由【佩玉年刊】向【佩玉廿七】之更">站點名称由【佩玉年刊】向【佩玉廿七】之更</a></p><p><span class="archives-time">11-13</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F40.html" target="_top" title="存在—类属—增站点类属於乙巳年九月廿四">存在—类属—增站点类属於乙巳年九月廿四</a></p><p><span class="archives-time">11-12</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F11%2F12%2F39.html" target="_top" title="站點使用之致謝—文本—伍次修正於乙巳年九月廿三">站點使用之致謝—文本—伍次修正於乙巳年九月廿三</a></p><p><span class="archives-time">11-12</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F11%2F12%2F36.html" target="_top" title="迷 路 2/6 因羊择古道 &lt; 雪 都 &gt;—文本—內容壹次修正於乙巳九月廿三">迷 路 2/6 因羊择古道 &lt; 雪 都 &gt;—文本—內容壹次修正於乙巳九月廿三</a></p><p><span class="archives-time">11-12</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F11%2F12%2F35.html" target="_top" title="迷 路 1/6 有人立着处 &lt; 雪 都 &gt;—文本—內容壹次修正於乙巳九月廿三">迷 路 1/6 有人立着处 &lt; 雪 都 &gt;—文本—內容壹次修正於乙巳九月廿三</a></p><p><span class="archives-time">11-12</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F11%2F12%2F34.html" target="_top" title="佩玉年刊时光快照—程序观察支持第三方站点链">佩玉年刊时光快照—程序观察支持第三方站点链</a></p>    
+                        </div>
+                    </li>
+                                
+                    <li class="archives-item">
+                        <div class="archives-item-content">
+                            <h3 class="archives-item-title"><a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F" target="_top">2025 年 10 月</a></h3>
+                            <p><span class="archives-time">10-28</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F28%2F33.html" target="_top" title="孔雀東南飛，成年—类属—增站点类属於乙巳年九月初八">孔雀東南飛，成年—类属—增站点类属於乙巳年九月初八</a></p><p><span class="archives-time">10-28</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F28%2F32.html" target="_top" title="佩玉年刊程序规范—文本—增文章至站務於乙巳年九月初八">佩玉年刊程序规范—文本—增文章至站務於乙巳年九月初八</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F31.html" target="_top" title="壞女人，照會—类属—增站点类属於乙巳年九月初七">壞女人，照會—类属—增站点类属於乙巳年九月初七</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F30.html" target="_top" title="黛子 / 乙巳蛇年至丙午马年—文本—内容壹次修正於乙巳年九月初七">黛子 / 乙巳蛇年至丙午马年—文本—内容壹次修正於乙巳年九月初七</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F24.html" target="_top" title="站點使用之致謝—文本—伍次修正於乙巳年九月初七">站點使用之致謝—文本—伍次修正於乙巳年九月初七</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F21.html" target="_top" title="佩玉年刊表—文本—内容壹次修正於乙巳年九月初七">佩玉年刊表—文本—内容壹次修正於乙巳年九月初七</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F20.html" target="_top" title="佩玉年刊表—文本—原始版本快照">佩玉年刊表—文本—原始版本快照</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F19.html" target="_top" title="黛子 / 乙巳蛇年至丙午马年—文本—新增文章於乙巳年九月初七">黛子 / 乙巳蛇年至丙午马年—文本—新增文章於乙巳年九月初七</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F18.html" target="_top" title="程序观察支持第三方站点链">程序观察支持第三方站点链</a></p><p><span class="archives-time">10-27</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F16.html" target="_top" title="佩玉年刊假象地—文本—内容修正於乙巳年九月初七">佩玉年刊假象地—文本—内容修正於乙巳年九月初七</a></p><p><span class="archives-time">10-24</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F24%2F25102402.html" target="_top" title="探駐馬跡録—文本—标点符号修正於乙巳年九月初四">探駐馬跡録—文本—标点符号修正於乙巳年九月初四</a></p><p><span class="archives-time">10-24</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F24%2F25102401.html" target="_top" title="站點使用之致謝—文本—肆次修正於乙巳年九月初四">站點使用之致謝—文本—肆次修正於乙巳年九月初四</a></p><p><span class="archives-time">10-24</span> <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F57.27.gs.cn%2Findex.php%2F2025%2F10%2F24%2F4.html" target="_top" title="駐馬跡（57.27.GS.CN）記—乙巳年九月初四">駐馬跡（57.27.GS.CN）記—乙巳年九月初四</a></p>    
+                        </div>
+                    </li>
+                            </ul>
+        </div>
+    </div>
+
+<a id="to_top" href="#" class="to_top" style="display: none;"><i class="ri-arrow-up-line"></i></a> 
+            <div class="footer">
+                 <nav class="nav">
+                 © 2017 - 2026 @<a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F27.gs.cn" target="_top"> 佩玉廿七 </a>· <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F27.gs.cn%2Findex.php%2F2025%2F10%2F16%2F251016.html" target="_top" target="_blank" rel="noopener">關於站點</a><br>
+                <a href="https://beian.miit.gov.cn/" target="_blank"><span>陇ICP备2024006021号</span></a><br>
+
+                 </nav>
+            </div>
+        </div>
+    
+    <script src="assets/5ff0a73606f657f7.js"></script>
+    <script src="assets/d24c9743e159b0fd.js"></script>
+
+
+
+
+
+</body></html>
