@@ -1,0 +1,857 @@
+<!DOCTYPE html><html lang="zh"><head><style>@keyframes pulsate{0%,to{opacity:1}50%{opacity:.2}}#spotlight{position:fixed;top:-1px;bottom:-1px;width:100%;z-index:99999;color:#fff;background-color:#000;opacity:0;overflow:hidden;-webkit-user-select:none;-ms-user-select:none;user-select:none;transition:opacity .2s ease-out;font-family:Arial,sans-serif;font-size:16px;font-weight:400;contain:strict;touch-action:none;pointer-events:none}#spotlight.show{opacity:1;transition:none;pointer-events:auto}#spotlight.white{color:#212529;background-color:#fff}#spotlight.white .spl-next,#spotlight.white .spl-page~*,#spotlight.white .spl-prev,#spotlight.white .spl-spinner{filter:invert(1)}#spotlight.white .spl-progress{background-color:rgba(0,0,0,.35)}#spotlight.white .spl-footer,#spotlight.white .spl-header{background-color:rgba(255,255,255,.65)}#spotlight.white .spl-button{background:#212529;color:#fff}.spl-footer,.spl-header{background-color:rgba(0,0,0,.45)}#spotlight .contain,#spotlight .cover{object-fit:cover;height:100%;width:100%}#spotlight .contain{object-fit:contain}#spotlight .autofit{object-fit:none;width:auto;height:auto;max-height:none;max-width:none;transition:none}.spl-scene,.spl-spinner,.spl-track{width:100%;height:100%;position:absolute}.spl-track{contain:strict}.spl-spinner{background-position:center;background-repeat:no-repeat;background-size:42px;opacity:0}.spl-spinner.spin{background-image:url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzgiIGhlaWdodD0iMzgiIHZpZXdCb3g9IjAgMCAzOCAzOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHJva2U9IiNmZmYiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSAxKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2Utb3BhY2l0eT0iLjY1Ij48Y2lyY2xlIHN0cm9rZS1vcGFjaXR5PSIuMTUiIGN4PSIxOCIgY3k9IjE4IiByPSIxOCIvPjxwYXRoIGQ9Ik0zNiAxOGMwLTkuOTQtOC4wNi0xOC0xOC0xOCI+PGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGZyb209IjAgMTggMTgiIHRvPSIzNjAgMTggMTgiIGR1cj0iMXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIi8+PC9wYXRoPjwvZz48L2c+PC9zdmc+);transition:opacity .2s linear .25s;opacity:1}.spl-spinner.error{background-image:url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjMyIiB3aWR0aD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTYsMUExNSwxNSwwLDEsMCwzMSwxNiwxNSwxNSwwLDAsMCwxNiwxWm0wLDJhMTMsMTMsMCwwLDEsOC40NSwzLjE0TDYuMTQsMjQuNDVBMTMsMTMsMCwwLDEsMTYsM1ptMCwyNmExMywxMywwLDAsMS04LjQ1LTMuMTRMMjUuODYsNy41NUExMywxMywwLDAsMSwxNiwyOVoiIGlkPSJiYW5fc2lnbl9jcm9zc2VkX2NpcmNsZSIvPjwvc3ZnPg==);background-size:128px;transition:none;opacity:.5}.spl-scene{transition:transform .65s cubic-bezier(.1,1,.1,1);contain:layout size;will-change:transform}.spl-pane>*{position:absolute;width:auto;height:auto;max-width:100%;max-height:100%;left:50%;top:50%;margin:0;padding:0;border:0;transform:translate(-50%,-50%) scale(1);transition:transform .65s cubic-bezier(.3,1,.3,1),opacity .65s ease;contain:layout style;will-change:transform,opacity;visibility:hidden}.spl-header,.spl-pane,.spl-progress{position:absolute;top:0}.spl-pane{width:100%;height:100%;transition:transform .65s cubic-bezier(.3,1,.3,1);contain:layout size;will-change:transform,contents}.spl-header{width:100%;height:50px;text-align:right;transform:translateY(-100px);transition:transform .35s ease;overflow:hidden;will-change:transform}#spotlight.menu .spl-footer,#spotlight.menu .spl-header,.spl-footer:hover,.spl-header:hover{transform:translateY(0)}.spl-header div{display:inline-block;vertical-align:middle;white-space:nowrap;width:50px;height:50px;opacity:.5}.spl-progress{width:100%;height:3px;background-color:rgba(255,255,255,.45);transform:translateX(-100%);transition:transform linear}.spl-footer,.spl-next,.spl-prev{position:absolute;transition:transform .35s ease;will-change:transform}.spl-footer{left:0;right:0;bottom:0;line-height:20px;padding:20px 20px 0;padding-bottom:env(safe-area-inset-bottom,0);text-align:left;font-size:15px;font-weight:400;transform:translateY(100%)}.spl-title{font-size:22px}.spl-button,.spl-description,.spl-title{margin-bottom:20px}.spl-button{display:inline-block;background:#fff;color:#000;border-radius:5px;padding:10px 20px;cursor:pointer}.spl-next,.spl-page~*,.spl-prev{background-position:center;background-repeat:no-repeat}.spl-page{float:left;width:auto;line-height:50px}.spl-page~*{background-size:21px;float:right}.spl-fullscreen{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyLjUiIHZpZXdCb3g9Ii0xIC0xIDI2IDI2IiB3aWR0aD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTggM0g1YTIgMiAwIDAgMC0yIDJ2M20xOCAwVjVhMiAyIDAgMCAwLTItMmgtM20wIDE4aDNhMiAyIDAgMCAwIDItMnYtM00zIDE2djNhMiAyIDAgMCAwIDIgMmgzIi8+PC9zdmc+)}.spl-fullscreen.on{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyLjUiIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik04IDN2M2EyIDIgMCAwIDEtMiAySDNtMTggMGgtM2EyIDIgMCAwIDEtMi0yVjNtMCAxOHYtM2EyIDIgMCAwIDEgMi0yaDNNMyAxNmgzYTIgMiAwIDAgMSAyIDJ2MyIvPjwvc3ZnPg==)}.spl-autofit{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBoZWlnaHQ9Ijk2cHgiIHZpZXdCb3g9IjAgMCA5NiA5NiIgd2lkdGg9Ijk2cHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggdHJhbnNmb3JtPSJyb3RhdGUoOTAgNTAgNTApIiBmaWxsPSIjZmZmIiBkPSJNNzEuMzExLDgwQzY5LjY3LDg0LjY2LDY1LjIzLDg4LDYwLDg4SDIwYy02LjYzLDAtMTItNS4zNy0xMi0xMlYzNmMwLTUuMjMsMy4zNC05LjY3LDgtMTEuMzExVjc2YzAsMi4yMSwxLjc5LDQsNCw0SDcxLjMxMSAgeiIvPjxwYXRoIHRyYW5zZm9ybT0icm90YXRlKDkwIDUwIDUwKSIgZmlsbD0iI2ZmZiIgZD0iTTc2LDhIMzZjLTYuNjMsMC0xMiw1LjM3LTEyLDEydjQwYzAsNi42Myw1LjM3LDEyLDEyLDEyaDQwYzYuNjMsMCwxMi01LjM3LDEyLTEyVjIwQzg4LDEzLjM3LDgyLjYzLDgsNzYsOHogTTgwLDYwICBjMCwyLjIxLTEuNzksNC00LDRIMzZjLTIuMjEsMC00LTEuNzktNC00VjIwYzAtMi4yMSwxLjc5LTQsNC00aDQwYzIuMjEsMCw0LDEuNzksNCw0VjYweiIvPjwvc3ZnPg==)}.spl-zoom-in,.spl-zoom-out{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMSIgY3k9IjExIiByPSI4Ii8+PGxpbmUgeDE9IjIxIiB4Mj0iMTYuNjUiIHkxPSIyMSIgeTI9IjE2LjY1Ii8+PGxpbmUgeDE9IjgiIHgyPSIxNCIgeTE9IjExIiB5Mj0iMTEiLz48L3N2Zz4=);background-size:22px}.spl-zoom-in{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMSIgY3k9IjExIiByPSI4Ii8+PGxpbmUgeDE9IjIxIiB4Mj0iMTYuNjUiIHkxPSIyMSIgeTI9IjE2LjY1Ii8+PGxpbmUgeDE9IjExIiB4Mj0iMTEiIHkxPSI4IiB5Mj0iMTQiLz48bGluZSB4MT0iOCIgeDI9IjE0IiB5MT0iMTEiIHkyPSIxMSIvPjwvc3ZnPg==)}.spl-download{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIxNDEuNzMycHgiIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDE0MS43MzIgMTQxLjczMiIgd2lkdGg9IjE0MS43MzJweCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMTIwLjY3NCwxMjUuMTM4SDIwLjc5M3YxNi41OTRoOTkuODgxVjEyNS4xMzh6IE0xMTkuMDE5LDU4Ljc3NmMtMi41NjEtMi41NjItNi43MTYtMi41NjItOS4yNzUsMEw3Ny4yMSw5MS4zMTJWNi41NjIgICBDNzcuMjEsMi45MzYsNzQuMjY5LDAsNzAuNjQ4LDBjLTMuNjI0LDAtNi41NiwyLjkzNy02LjU2LDYuNTYzdjg0Ljc1TDMxLjk5Miw1OS4yMThjLTIuNTYyLTIuNTY0LTYuNzE1LTIuNTY0LTkuMjc3LDAgICBjLTIuNTY1LDIuNTYyLTIuNTY1LDYuNzE2LDAsOS4yNzlsNDMuMjk0LDQzLjI5M2MwLjE1LDAuMTU0LDAuMzE0LDAuMjk5LDAuNDgxLDAuNDM4YzAuMDc2LDAuMDYyLDAuMTU1LDAuMTEzLDAuMjM0LDAuMTc2ICAgYzAuMDk0LDAuMDY1LDAuMTg2LDAuMTQyLDAuMjc5LDAuMjA2YzAuMDk3LDAuMDYzLDAuMTkyLDAuMTE0LDAuMjg2LDAuMTc0YzAuMDg4LDAuMDU0LDAuMTc0LDAuMTA1LDAuMjY1LDAuMTUzICAgYzAuMSwwLjA1NiwwLjE5OSwwLjEsMC4yOTgsMC4xNDdjMC4wOTcsMC4wNDUsMC4xOSwwLjA5MSwwLjI4MywwLjEzMmMwLjA5OCwwLjA0LDAuMTk2LDAuMDcyLDAuMjk1LDAuMTA1ICAgYzAuMTA0LDAuMDM4LDAuMjA3LDAuMDc4LDAuMzEyLDAuMTA5YzAuMTAxLDAuMDMsMC4xOTcsMC4wNTIsMC4yOTcsMC4wNzdjMC4xMDgsMC4wMjMsMC4yMTQsMC4wNTgsMC4zMjQsMC4wNzggICBjMC4xMTUsMC4wMjEsMC4yMzEsMC4wMzMsMC4zNDYsMC4wNTRjMC4wOTcsMC4wMTUsMC4xOTIsMC4wMzIsMC4yODksMC4wNDJjMC40MywwLjA0MiwwLjg2NSwwLjA0MiwxLjI5NSwwICAgYzAuMS0wLjAxLDAuMTkxLTAuMDI3LDAuMjg5LTAuMDQyYzAuMTE0LTAuMDIxLDAuMjMzLTAuMDI5LDAuMzQ0LTAuMDU0YzAuMTA5LTAuMDIxLDAuMjE3LTAuMDU1LDAuMzI0LTAuMDc4ICAgYzAuMTAyLTAuMDI1LDAuMTk5LTAuMDQ3LDAuMjk5LTAuMDc3YzAuMTA1LTAuMDMxLDAuMjA3LTAuMDcxLDAuMzEyLTAuMTA5YzAuMTAyLTAuMDMsMC4xOTUtMC4wNjIsMC4yOTUtMC4xMDUgICBjMC4wOTYtMC4wNDEsMC4xOTEtMC4wODcsMC4yODMtMC4xMzJjMC4xLTAuMDQ4LDAuMTk5LTAuMDkyLDAuMjk3LTAuMTQ3YzAuMDkxLTAuMDQ4LDAuMTc3LTAuMTA0LDAuMjY0LTAuMTUzICAgYzAuMDk4LTAuMDYsMC4xOTMtMC4xMSwwLjI4Ny0wLjE3NGMwLjA5Ni0wLjA2NCwwLjE4OS0wLjE0MSwwLjI4MS0wLjIwNmMwLjA3Ni0wLjA2MiwwLjE1Ni0wLjExMywwLjIzMy0wLjE3NiAgIGMwLjI0OS0wLjIwNCwwLjQ3OS0wLjQzNywwLjY5NC0wLjY3YzAuMDc2LTAuMDY3LDAuMTU0LTAuMTMxLDAuMjI5LTAuMjAzbDQzLjI5NC00My4yOTYgICBDMTIxLjU4MSw2NS40OTEsMTIxLjU4MSw2MS4zMzcsMTE5LjAxOSw1OC43NzYiLz48L2c+PC9zdmc+);background-size:20px}.spl-theme{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBoZWlnaHQ9IjI0cHgiIHZlcnNpb249IjEuMiIgdmlld0JveD0iMiAyIDIwIDIwIiB3aWR0aD0iMjRweCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMTIsNGMtNC40MTgsMC04LDMuNTgyLTgsOHMzLjU4Miw4LDgsOHM4LTMuNTgyLDgtOFMxNi40MTgsNCwxMiw0eiBNMTIsMThjLTMuMzE0LDAtNi0yLjY4Ni02LTZzMi42ODYtNiw2LTZzNiwyLjY4Niw2LDYgUzE1LjMxNCwxOCwxMiwxOHoiLz48cGF0aCBkPSJNMTIsN3YxMGMyLjc1NywwLDUtMi4yNDMsNS01UzE0Ljc1Nyw3LDEyLDd6Ii8+PC9nPjwvc3ZnPg==)}.spl-play{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSItMC41IC0wLjUgMjUgMjUiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIvPjxwb2x5Z29uIGZpbGw9IiNmZmYiIHBvaW50cz0iMTAgOCAxNiAxMiAxMCAxNiAxMCA4Ii8+PC9zdmc+)}.spl-play.on{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSItMC41IC0wLjUgMjUgMjUiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMCIvPjxsaW5lIHgxPSIxMCIgeDI9IjEwIiB5MT0iMTUiIHkyPSI5Ii8+PGxpbmUgeDE9IjE0IiB4Mj0iMTQiIHkxPSIxNSIgeTI9IjkiLz48L3N2Zz4=);animation:pulsate 1s ease infinite}.spl-close{background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIyIDIgMjAgMjAiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48bGluZSB4MT0iMTgiIHgyPSI2IiB5MT0iNiIgeTI9IjE4Ii8+PGxpbmUgeDE9IjYiIHgyPSIxOCIgeTE9IjYiIHkyPSIxOCIvPjwvc3ZnPg==)}.spl-next,.spl-prev{top:50%;width:50px;height:50px;opacity:.65;background-color:rgba(0,0,0,.45);border-radius:100%;cursor:pointer;margin-top:-25px;transform:translateX(-100px);background-image:url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIj8+PHN2ZyBmaWxsPSJub25lIiBoZWlnaHQ9IjI0IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cG9seWxpbmUgcG9pbnRzPSIxNSAxOCA5IDEyIDE1IDYiLz48L3N2Zz4=);background-size:30px}.spl-prev{left:20px}.spl-next{left:auto;right:20px;transform:translateX(100px) scaleX(-1)}#spotlight.menu .spl-prev{transform:translateX(0)}#spotlight.menu .spl-next{transform:translateX(0) scaleX(-1)}@media (hover:hover){.spl-page~div{cursor:pointer;transition:opacity .2s ease}.spl-next:hover,.spl-page~div:hover,.spl-prev:hover{opacity:1}}@media (max-width:500px){.spl-header div{width:44px}.spl-footer .spl-title{font-size:20px}.spl-footer{font-size:14px}.spl-next,.spl-prev{width:35px;height:35px;margin-top:-17.5px;background-size:15px 15px}.spl-spinner{background-size:30px 30px}}.hide-scrollbars{overflow:hidden!important}</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//source.ahdark.com">
+    <link rel="icon" type="image/png" href="assets/7224ab5ffa303cab.png">
+    <link href="assets/7224ab5ffa303cab.png" rel="icon">
+    <link rel="dns-prefetch" href="//s.w.org">
+    <link rel="apple-touch-icon-precomposed" href="assets/7224ab5ffa303cab.png">
+    <title>暖煙桃源 | 福佳廿七</title>
+        
+    <style>
+        @font-face {
+          font-family: 'Source Han Serif CN'; /* 自定义字体名称 */
+          src: url('assets/2f730bcbfdd783a9.woff2') format('woff2');
+          font-display: swap; /* 指定字体文件路径和格式 */
+        }
+        
+        body {
+            font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif;
+        }
+    </style>
+    <style>
+        /* 输出自定义主题色 */
+        html {
+            --theme-color: #000080;
+            --header-color: #000000;
+            --theme-radius: 0px;
+            --theme-shadow: 0 6px 12px 0 rgb(31 35 41 / 8%);
+            }
+    </style>
+
+            <link rel="stylesheet" href="assets/a4ce4dafe7d3521a.css">
+        <link rel="stylesheet" href="assets/406cee4b4404b5bc.css">
+    <link rel="stylesheet alternate" href="https://277.27.gs.cn/usr/themes/G/static/css/dark.min.css?v=3.4.1" title="dark" disabled="">
+
+    <style>
+        /* 设置自定义背景[颜色/图片] */
+        html::before {
+            background-image: url(assets/bb3c998c2a4435a5.png);                    }
+
+        #timeline .year-title         { font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif; font-size: 2.3rem;font-weight: bold; text-align: left ; color: #333 ; margin: 0 0 30px 0 ; border-bottom: 1px solid #ddd; padding-bottom: 5px;  }
+#timeline .archive-list       { list-style: none; padding: 0; margin: 0; }
+#timeline .archive-item       { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px dashed #eee; }
+#timeline .archive-item a     { font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif; color: #333 ; text-decoration: none; }
+#timeline .archive-item a:hover { text-decoration: underline; }
+#timeline .archive-date       { font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif; color: #888; font-size: 0.9em; white-space: nowrap; }
+#字号修改
+/* 全局字体 */
+body {
+  font-size: 18px;
+}
+/* 调整文章正文 */
+.post-content, .entry-content {
+  font-size: 20px;
+}
+#字体加粗
+/* 全局字体 SemiBold */
+body {
+  font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif;
+  font-size: 18px;
+}
+
+/* 年代标题改成 SemiBold */
+#timeline .year-title {
+  font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif;
+  font-size: 2.3rem;
+  text-align: left;
+  color: #333;
+  margin: 0 0 30px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+/* 列表链接 SemiBold */
+#timeline .archive-item a {
+  font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif;
+  color: #333;
+  text-decoration: none;
+
+}
+
+/* 日期文字也 SemiBold */
+#timeline .archive-date {
+  font-family: "Source Han Serif CN", "Source Han Serif SC", "Source Han Serif", "Noto Serif CJK SC", serif;
+  color: #888;
+  font-size: 0.9em;
+  white-space: nowrap;
+}
+
+/* 文章正文 SemiBold */
+.post-content,
+.entry-content {
+  font-size: 20px;
+}
+    </style>
+    <meta name="description" content="暖煙桃源">
+<meta name="generator" content="Typecho 1.2.1">
+<meta name="template" content="G">
+<link rel="pingback" href="https://277.27.gs.cn/index.php/action/xmlrpc">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://277.27.gs.cn/index.php/action/xmlrpc?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://277.27.gs.cn/index.php/action/xmlrpc?wlw">
+<link rel="alternate" type="application/rss+xml" title="暖煙桃源 » 福佳廿七 » RSS 2.0" href="https://277.27.gs.cn/index.php/feed/217.html">
+<link rel="alternate" type="application/rdf+xml" title="暖煙桃源 » 福佳廿七 » RSS 1.0" href="https://277.27.gs.cn/index.php/feed/rss/217.html">
+<link rel="alternate" type="application/atom+xml" title="暖煙桃源 » 福佳廿七 » ATOM 1.0" href="https://277.27.gs.cn/index.php/feed/atom/217.html">
+<script type="text/javascript">
+(function () {
+    window.TypechoComment = {
+        dom : function (id) {
+            return document.getElementById(id);
+        },
+    
+        create : function (tag, attr) {
+            var el = document.createElement(tag);
+        
+            for (var key in attr) {
+                el.setAttribute(key, attr[key]);
+            }
+        
+            return el;
+        },
+
+        reply : function (cid, coid) {
+            var comment = this.dom(cid), parent = comment.parentNode,
+                response = this.dom('respond-page-11'), input = this.dom('comment-parent'),
+                form = 'form' == response.tagName ? response : response.getElementsByTagName('form')[0],
+                textarea = response.getElementsByTagName('textarea')[0];
+
+            if (null == input) {
+                input = this.create('input', {
+                    'type' : 'hidden',
+                    'name' : 'parent',
+                    'id'   : 'comment-parent'
+                });
+
+                form.appendChild(input);
+            }
+
+            input.setAttribute('value', coid);
+
+            if (null == this.dom('comment-form-place-holder')) {
+                var holder = this.create('div', {
+                    'id' : 'comment-form-place-holder'
+                });
+
+                response.parentNode.insertBefore(holder, response);
+            }
+
+            comment.appendChild(response);
+            this.dom('cancel-comment-reply-link').style.display = '';
+
+            if (null != textarea && 'text' == textarea.name) {
+                textarea.focus();
+            }
+
+            return false;
+        },
+
+        cancelReply : function () {
+            var response = this.dom('respond-page-11'),
+            holder = this.dom('comment-form-place-holder'), input = this.dom('comment-parent');
+
+            if (null != input) {
+                input.parentNode.removeChild(input);
+            }
+
+            if (null == holder) {
+                return true;
+            }
+
+            this.dom('cancel-comment-reply-link').style.display = 'none';
+            holder.parentNode.insertBefore(response, holder);
+            return false;
+        }
+    };
+})();
+</script>
+
+<link rel="stylesheet" href="assets/9fd5ba4f916d7810.css">
+<!--插件配置-->
+<script>
+ExSearchConfig = {
+    root : "",
+    api : "https://277.27.gs.cn/usr/plugins/ExSearch/cache/cache-46dca6f2675259c6a105f4edb492c745.json"
+}
+</script>
+    <script src="assets/45e3601ee8871f75.js"></script><style>:root{--balloon-border-radius:2px;--balloon-color:rgba(16,16,16,0.95);--balloon-text-color:#fff;--balloon-font-size:12px;--balloon-move:4px}button[aria-label][data-balloon-pos]{overflow:visible}[aria-label][data-balloon-pos]{position:relative;cursor:pointer}[aria-label][data-balloon-pos]:after{text-indent:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif;font-weight:400;font-style:normal;text-shadow:none;font-size:var(--balloon-font-size);background:var(--balloon-color);border-radius:2px;color:var(--balloon-text-color);border-radius:var(--balloon-border-radius);content:attr(aria-label);padding:.5em 1em;white-space:nowrap}[aria-label][data-balloon-pos]:after,[aria-label][data-balloon-pos]:before{opacity:0;pointer-events:none;transition:all .18s ease-out .18s;position:absolute;z-index:10}[aria-label][data-balloon-pos]:before{width:0;height:0;border:5px solid transparent;border-top:5px solid var(--balloon-color);content:""}[aria-label][data-balloon-pos]:hover:after,[aria-label][data-balloon-pos]:hover:before,[aria-label][data-balloon-pos]:not([data-balloon-nofocus]):focus:after,[aria-label][data-balloon-pos]:not([data-balloon-nofocus]):focus:before,[aria-label][data-balloon-pos][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-visible]:before{opacity:1;pointer-events:none}[aria-label][data-balloon-pos].font-awesome:after{font-family:FontAwesome,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Open Sans,Helvetica Neue,sans-serif}[aria-label][data-balloon-pos][data-balloon-break]:after{white-space:pre}[aria-label][data-balloon-pos][data-balloon-break][data-balloon-length]:after{white-space:pre-line;word-break:break-word}[aria-label][data-balloon-pos][data-balloon-blunt]:after,[aria-label][data-balloon-pos][data-balloon-blunt]:before{transition:none}[aria-label][data-balloon-pos][data-balloon-pos=up]:after{margin-bottom:10px}[aria-label][data-balloon-pos][data-balloon-pos=up]:after,[aria-label][data-balloon-pos][data-balloon-pos=up]:before{bottom:100%;left:50%;transform:translate(-50%,var(--balloon-move));transform-origin:top}[aria-label][data-balloon-pos][data-balloon-pos=up]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=up]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=up][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=up][data-balloon-visible]:before{transform:translate(-50%)}[aria-label][data-balloon-pos][data-balloon-pos=up-left]:after{bottom:100%;left:0;margin-bottom:10px;transform:translateY(var(--balloon-move));transform-origin:top}[aria-label][data-balloon-pos][data-balloon-pos=up-left]:before{bottom:100%;left:5px;transform:translateY(var(--balloon-move));transform-origin:top}[aria-label][data-balloon-pos][data-balloon-pos=up-left]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=up-left]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=up-left][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=up-left][data-balloon-visible]:before{transform:translate(0)}[aria-label][data-balloon-pos][data-balloon-pos=up-right]:after{bottom:100%;right:0;margin-bottom:10px;transform:translateY(var(--balloon-move));transform-origin:top}[aria-label][data-balloon-pos][data-balloon-pos=up-right]:before{bottom:100%;right:5px;transform:translateY(var(--balloon-move));transform-origin:top}[aria-label][data-balloon-pos][data-balloon-pos=up-right]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=up-right]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=up-right][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=up-right][data-balloon-visible]:before{transform:translate(0)}[aria-label][data-balloon-pos][data-balloon-pos=down]:after{left:50%;margin-top:10px;top:100%;transform:translate(-50%,calc(var(--balloon-move)*-1))}[aria-label][data-balloon-pos][data-balloon-pos=down]:before{width:0;height:0;border:5px solid transparent;border-bottom:5px solid var(--balloon-color);left:50%;top:100%;transform:translate(-50%,calc(var(--balloon-move)*-1))}[aria-label][data-balloon-pos][data-balloon-pos=down]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=down]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=down][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=down][data-balloon-visible]:before{transform:translate(-50%)}[aria-label][data-balloon-pos][data-balloon-pos=down-left]:after{left:0;margin-top:10px;top:100%;transform:translateY(calc(var(--balloon-move)*-1))}[aria-label][data-balloon-pos][data-balloon-pos=down-left]:before{width:0;height:0;border:5px solid transparent;border-bottom:5px solid var(--balloon-color);left:5px;top:100%;transform:translateY(calc(var(--balloon-move)*-1))}[aria-label][data-balloon-pos][data-balloon-pos=down-left]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=down-left]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=down-left][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=down-left][data-balloon-visible]:before{transform:translate(0)}[aria-label][data-balloon-pos][data-balloon-pos=down-right]:after{right:0;margin-top:10px;top:100%;transform:translateY(calc(var(--balloon-move)*-1))}[aria-label][data-balloon-pos][data-balloon-pos=down-right]:before{width:0;height:0;border:5px solid transparent;border-bottom:5px solid var(--balloon-color);right:5px;top:100%;transform:translateY(calc(var(--balloon-move)*-1))}[aria-label][data-balloon-pos][data-balloon-pos=down-right]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=down-right]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=down-right][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=down-right][data-balloon-visible]:before{transform:translate(0)}[aria-label][data-balloon-pos][data-balloon-pos=left]:after{margin-right:10px;right:100%;top:50%;transform:translate(var(--balloon-move),-50%)}[aria-label][data-balloon-pos][data-balloon-pos=left]:before{width:0;height:0;border:5px solid transparent;border-left:5px solid var(--balloon-color);right:100%;top:50%;transform:translate(var(--balloon-move),-50%)}[aria-label][data-balloon-pos][data-balloon-pos=left]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=left]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=left][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=left][data-balloon-visible]:before{transform:translateY(-50%)}[aria-label][data-balloon-pos][data-balloon-pos=right]:after{left:100%;margin-left:10px;top:50%;transform:translate(calc(var(--balloon-move)*-1),-50%)}[aria-label][data-balloon-pos][data-balloon-pos=right]:before{width:0;height:0;border:5px solid transparent;border-right:5px solid var(--balloon-color);left:100%;top:50%;transform:translate(calc(var(--balloon-move)*-1),-50%)}[aria-label][data-balloon-pos][data-balloon-pos=right]:hover:after,[aria-label][data-balloon-pos][data-balloon-pos=right]:hover:before,[aria-label][data-balloon-pos][data-balloon-pos=right][data-balloon-visible]:after,[aria-label][data-balloon-pos][data-balloon-pos=right][data-balloon-visible]:before{transform:translateY(-50%)}[aria-label][data-balloon-pos][data-balloon-length=small]:after{white-space:normal;width:80px}[aria-label][data-balloon-pos][data-balloon-length=medium]:after{white-space:normal;width:150px}[aria-label][data-balloon-pos][data-balloon-length=large]:after{white-space:normal;width:260px}[aria-label][data-balloon-pos][data-balloon-length=xlarge]:after{white-space:normal;width:380px}@media screen and (max-width:768px){[aria-label][data-balloon-pos][data-balloon-length=xlarge]:after{white-space:normal;width:90vw}}[aria-label][data-balloon-pos][data-balloon-length=fit]:after{white-space:normal;width:100%}</style><style>@-webkit-keyframes my-face{2%{transform:translateY(1.5px) rotate(1.5deg)}4%{transform:translateY(-1.5px) rotate(-.5deg)}6%{transform:translateY(1.5px) rotate(-1.5deg)}8%{transform:translateY(-1.5px) rotate(-1.5deg)}10%{transform:translateY(2.5px) rotate(1.5deg)}12%{transform:translateY(-.5px) rotate(1.5deg)}14%{transform:translateY(-1.5px) rotate(1.5deg)}16%{transform:translateY(-.5px) rotate(-1.5deg)}18%{transform:translateY(.5px) rotate(-1.5deg)}20%{transform:translateY(-1.5px) rotate(2.5deg)}22%{transform:translateY(.5px) rotate(-1.5deg)}24%{transform:translateY(1.5px) rotate(1.5deg)}26%{transform:translateY(.5px) rotate(.5deg)}28%{transform:translateY(.5px) rotate(1.5deg)}30%{transform:translateY(-.5px) rotate(2.5deg)}32%{transform:translateY(1.5px) rotate(-.5deg)}34%{transform:translateY(1.5px) rotate(-.5deg)}36%{transform:translateY(-1.5px) rotate(2.5deg)}38%{transform:translateY(1.5px) rotate(-1.5deg)}40%{transform:translateY(-.5px) rotate(2.5deg)}42%{transform:translateY(2.5px) rotate(-1.5deg)}44%{transform:translateY(1.5px) rotate(.5deg)}46%{transform:translateY(-1.5px) rotate(2.5deg)}48%{transform:translateY(-.5px) rotate(.5deg)}50%{transform:translateY(.5px) rotate(.5deg)}52%{transform:translateY(2.5px) rotate(2.5deg)}54%{transform:translateY(-1.5px) rotate(1.5deg)}56%{transform:translateY(2.5px) rotate(2.5deg)}58%{transform:translateY(.5px) rotate(2.5deg)}60%{transform:translateY(2.5px) rotate(2.5deg)}62%{transform:translateY(-.5px) rotate(2.5deg)}64%{transform:translateY(-.5px) rotate(1.5deg)}66%{transform:translateY(1.5px) rotate(-.5deg)}68%{transform:translateY(-1.5px) rotate(-.5deg)}70%{transform:translateY(1.5px) rotate(.5deg)}72%{transform:translateY(2.5px) rotate(1.5deg)}74%{transform:translateY(-.5px) rotate(.5deg)}76%{transform:translateY(-.5px) rotate(2.5deg)}78%{transform:translateY(-.5px) rotate(1.5deg)}80%{transform:translateY(1.5px) rotate(1.5deg)}82%{transform:translateY(-.5px) rotate(.5deg)}84%{transform:translateY(1.5px) rotate(2.5deg)}86%{transform:translateY(-1.5px) rotate(-1.5deg)}88%{transform:translateY(-.5px) rotate(2.5deg)}90%{transform:translateY(2.5px) rotate(-.5deg)}92%{transform:translateY(.5px) rotate(-.5deg)}94%{transform:translateY(2.5px) rotate(.5deg)}96%{transform:translateY(-.5px) rotate(1.5deg)}98%{transform:translateY(-1.5px) rotate(-.5deg)}0%,to{transform:translate(0) rotate(0deg)}}@keyframes my-face{2%{transform:translateY(1.5px) rotate(1.5deg)}4%{transform:translateY(-1.5px) rotate(-.5deg)}6%{transform:translateY(1.5px) rotate(-1.5deg)}8%{transform:translateY(-1.5px) rotate(-1.5deg)}10%{transform:translateY(2.5px) rotate(1.5deg)}12%{transform:translateY(-.5px) rotate(1.5deg)}14%{transform:translateY(-1.5px) rotate(1.5deg)}16%{transform:translateY(-.5px) rotate(-1.5deg)}18%{transform:translateY(.5px) rotate(-1.5deg)}20%{transform:translateY(-1.5px) rotate(2.5deg)}22%{transform:translateY(.5px) rotate(-1.5deg)}24%{transform:translateY(1.5px) rotate(1.5deg)}26%{transform:translateY(.5px) rotate(.5deg)}28%{transform:translateY(.5px) rotate(1.5deg)}30%{transform:translateY(-.5px) rotate(2.5deg)}32%{transform:translateY(1.5px) rotate(-.5deg)}34%{transform:translateY(1.5px) rotate(-.5deg)}36%{transform:translateY(-1.5px) rotate(2.5deg)}38%{transform:translateY(1.5px) rotate(-1.5deg)}40%{transform:translateY(-.5px) rotate(2.5deg)}42%{transform:translateY(2.5px) rotate(-1.5deg)}44%{transform:translateY(1.5px) rotate(.5deg)}46%{transform:translateY(-1.5px) rotate(2.5deg)}48%{transform:translateY(-.5px) rotate(.5deg)}50%{transform:translateY(.5px) rotate(.5deg)}52%{transform:translateY(2.5px) rotate(2.5deg)}54%{transform:translateY(-1.5px) rotate(1.5deg)}56%{transform:translateY(2.5px) rotate(2.5deg)}58%{transform:translateY(.5px) rotate(2.5deg)}60%{transform:translateY(2.5px) rotate(2.5deg)}62%{transform:translateY(-.5px) rotate(2.5deg)}64%{transform:translateY(-.5px) rotate(1.5deg)}66%{transform:translateY(1.5px) rotate(-.5deg)}68%{transform:translateY(-1.5px) rotate(-.5deg)}70%{transform:translateY(1.5px) rotate(.5deg)}72%{transform:translateY(2.5px) rotate(1.5deg)}74%{transform:translateY(-.5px) rotate(.5deg)}76%{transform:translateY(-.5px) rotate(2.5deg)}78%{transform:translateY(-.5px) rotate(1.5deg)}80%{transform:translateY(1.5px) rotate(1.5deg)}82%{transform:translateY(-.5px) rotate(.5deg)}84%{transform:translateY(1.5px) rotate(2.5deg)}86%{transform:translateY(-1.5px) rotate(-1.5deg)}88%{transform:translateY(-.5px) rotate(2.5deg)}90%{transform:translateY(2.5px) rotate(-.5deg)}92%{transform:translateY(.5px) rotate(-.5deg)}94%{transform:translateY(2.5px) rotate(.5deg)}96%{transform:translateY(-.5px) rotate(1.5deg)}98%{transform:translateY(-1.5px) rotate(-.5deg)}0%,to{transform:translate(0) rotate(0deg)}}.dplayer{position:relative;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;line-height:1}.dplayer *{box-sizing:content-box}.dplayer svg{width:100%;height:100%}.dplayer svg circle,.dplayer svg path{fill:#fff}.dplayer:-webkit-full-screen{width:100%;height:100%;background:#000;position:fixed;z-index:100000;left:0;top:0;margin:0;padding:0;transform:translate(0)}.dplayer:-webkit-full-screen .dplayer-danmaku .dplayer-danmaku-bottom.dplayer-danmaku-move,.dplayer:-webkit-full-screen .dplayer-danmaku .dplayer-danmaku-top.dplayer-danmaku-move{-webkit-animation:danmaku-center 6s linear;animation:danmaku-center 6s linear;-webkit-animation-play-state:inherit;animation-play-state:inherit}.dplayer:-webkit-full-screen .dplayer-danmaku .dplayer-danmaku-right.dplayer-danmaku-move{-webkit-animation:danmaku 8s linear;animation:danmaku 8s linear;-webkit-animation-play-state:inherit;animation-play-state:inherit}.dplayer.dplayer-live .dplayer-bar-wrap,.dplayer.dplayer-live.dplayer-no-danmaku .dplayer-setting,.dplayer.dplayer-live .dplayer-setting-loop,.dplayer.dplayer-live .dplayer-setting-speed,.dplayer.dplayer-live .dplayer-time,.dplayer.dplayer-no-danmaku .dplayer-controller .dplayer-icons .dplayer-comment,.dplayer.dplayer-no-danmaku .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box .dplayer-setting-danmaku,.dplayer.dplayer-no-danmaku .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box .dplayer-setting-danunlimit,.dplayer.dplayer-no-danmaku .dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box .dplayer-setting-showdan,.dplayer.dplayer-no-danmaku .dplayer-danmaku{display:none}.dplayer.dplayer-arrow .dplayer-danmaku{font-size:18px}.dplayer.dplayer-arrow .dplayer-icon{margin:0 -3px}.dplayer.dplayer-playing .dplayer-danmaku .dplayer-danmaku-move{-webkit-animation-play-state:running;animation-play-state:running}@media (min-width:900px){.dplayer.dplayer-playing .dplayer-controller,.dplayer.dplayer-playing .dplayer-controller-mask{opacity:0}.dplayer.dplayer-playing:hover .dplayer-controller,.dplayer.dplayer-playing:hover .dplayer-controller-mask{opacity:1}}.dplayer.dplayer-loading .dplayer-bezel .diplayer-loading-icon{display:block}.dplayer.dplayer-loading .dplayer-danmaku,.dplayer.dplayer-loading .dplayer-danmaku-move,.dplayer.dplayer-paused .dplayer-danmaku,.dplayer.dplayer-paused .dplayer-danmaku-move{-webkit-animation-play-state:paused;animation-play-state:paused}.dplayer.dplayer-hide-controller{cursor:none}.dplayer.dplayer-hide-controller .dplayer-controller,.dplayer.dplayer-hide-controller .dplayer-controller-mask{opacity:0;transform:translateY(100%)}.dplayer.dplayer-show-controller .dplayer-controller,.dplayer.dplayer-show-controller .dplayer-controller-mask{opacity:1}.dplayer.dplayer-fulled{position:fixed;z-index:100000;left:0;top:0;width:100%!important;height:100%!important}.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-airplay-icon,.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-camera-icon,.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-play-icon,.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-volume{display:none}.dplayer.dplayer-mobile .dplayer-controller .dplayer-icons .dplayer-full .dplayer-full-in-icon{position:static;display:inline-block}.dplayer.dplayer-mobile .dplayer-bar-time,.dplayer.dplayer-mobile.dplayer-hide-controller .dplayer-mobile-play{display:none}.dplayer.dplayer-mobile .dplayer-mobile-play{display:block}.dplayer-web-fullscreen-fix{position:fixed;top:0;left:0;margin:0;padding:0}[data-balloon]:before{display:none}[data-balloon]:after{padding:.3em .7em;background:rgba(17,17,17,.7)}[data-balloon][data-balloon-pos=up]:after{margin-bottom:0}.dplayer-bezel{position:absolute;left:0;right:0;top:0;bottom:0;font-size:22px;color:#fff;pointer-events:none}.dplayer-bezel .dplayer-bezel-icon{position:absolute;top:50%;left:50%;margin:-26px 0 0 -26px;height:52px;width:52px;padding:12px;box-sizing:border-box;background:rgba(0,0,0,.5);border-radius:50%;opacity:0;pointer-events:none}.dplayer-bezel .dplayer-bezel-icon.dplayer-bezel-transition{-webkit-animation:bezel-hide .5s linear;animation:bezel-hide .5s linear}@-webkit-keyframes bezel-hide{0%{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(2)}}@keyframes bezel-hide{0%{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(2)}}.dplayer-bezel .dplayer-danloading{position:absolute;top:50%;margin-top:-7px;width:100%;text-align:center;font-size:14px;line-height:14px;-webkit-animation:my-face 5s ease-in-out infinite;animation:my-face 5s ease-in-out infinite}.dplayer-bezel .diplayer-loading-icon{display:none;position:absolute;top:50%;left:50%;margin:-18px 0 0 -18px;height:36px;width:36px;pointer-events:none}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-hide{display:none}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot{-webkit-animation:diplayer-loading-dot-fade .8s ease infinite;animation:diplayer-loading-dot-fade .8s ease infinite;opacity:0;transform-origin:4px 4px}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot.diplayer-loading-dot-7{-webkit-animation-delay:.7s;animation-delay:.7s}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot.diplayer-loading-dot-6{-webkit-animation-delay:.6s;animation-delay:.6s}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot.diplayer-loading-dot-5{-webkit-animation-delay:.5s;animation-delay:.5s}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot.diplayer-loading-dot-4{-webkit-animation-delay:.4s;animation-delay:.4s}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot.diplayer-loading-dot-3{-webkit-animation-delay:.3s;animation-delay:.3s}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot.diplayer-loading-dot-2{-webkit-animation-delay:.2s;animation-delay:.2s}.dplayer-bezel .diplayer-loading-icon .diplayer-loading-dot.diplayer-loading-dot-1{-webkit-animation-delay:.1s;animation-delay:.1s}@-webkit-keyframes diplayer-loading-dot-fade{0%{opacity:.7;transform:scale(1.2)}50%{opacity:.25;transform:scale(.9)}to{opacity:.25;transform:scale(.85)}}@keyframes diplayer-loading-dot-fade{0%{opacity:.7;transform:scale(1.2)}50%{opacity:.25;transform:scale(.9)}to{opacity:.25;transform:scale(.85)}}.dplayer-controller-mask{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==) repeat-x bottom;height:98px;width:100%}.dplayer-controller,.dplayer-controller-mask{position:absolute;bottom:0;transition:all .3s ease}.dplayer-controller{left:0;right:0;height:41px;padding:0 20px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.dplayer-controller.dplayer-controller-comment .dplayer-icons{display:none}.dplayer-controller.dplayer-controller-comment .dplayer-icons.dplayer-comment-box{display:block}.dplayer-controller .dplayer-bar-wrap{padding:5px 0;cursor:pointer;position:absolute;bottom:33px;width:calc(100% - 40px);height:3px}.dplayer-controller .dplayer-bar-wrap:hover .dplayer-bar .dplayer-played .dplayer-thumb{transform:scale(1)}.dplayer-controller .dplayer-bar-wrap:hover .dplayer-highlight{display:block;width:8px;transform:translateX(-4px);top:4px;height:40%}.dplayer-controller .dplayer-bar-wrap .dplayer-highlight{z-index:12;position:absolute;top:5px;width:6px;height:20%;border-radius:6px;background-color:#fff;text-align:center;transform:translateX(-3px);transition:all .2s ease-in-out}.dplayer-controller .dplayer-bar-wrap .dplayer-highlight:hover .dplayer-highlight-text{display:block}.dplayer-controller .dplayer-bar-wrap .dplayer-highlight:hover~.dplayer-bar-preview,.dplayer-controller .dplayer-bar-wrap .dplayer-highlight:hover~.dplayer-bar-time{opacity:0}.dplayer-controller .dplayer-bar-wrap .dplayer-highlight .dplayer-highlight-text{display:none;position:absolute;left:50%;top:-24px;padding:5px 8px;background-color:rgba(0,0,0,.62);color:#fff;border-radius:4px;font-size:12px;white-space:nowrap;transform:translateX(-50%)}.dplayer-controller .dplayer-bar-wrap .dplayer-bar-preview{position:absolute;background:#fff;pointer-events:none;display:none;background-size:16000px 100%}.dplayer-controller .dplayer-bar-wrap .dplayer-bar-preview-canvas{position:absolute;width:100%;height:100%;z-index:1;pointer-events:none}.dplayer-controller .dplayer-bar-wrap .dplayer-bar-time{position:absolute;left:0;top:-20px;border-radius:4px;padding:5px 7px;background-color:rgba(0,0,0,.62);color:#fff;font-size:12px;text-align:center;opacity:1;transition:opacity .1s ease-in-out;word-wrap:normal;word-break:normal;z-index:2;pointer-events:none}.dplayer-controller .dplayer-bar-wrap .dplayer-bar-time.hidden{opacity:0}.dplayer-controller .dplayer-bar-wrap .dplayer-bar{position:relative;height:3px;width:100%;background:hsla(0,0%,100%,.2);cursor:pointer}.dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-loaded{background:hsla(0,0%,100%,.4);transition:all .5s ease}.dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-loaded,.dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-played{position:absolute;left:0;top:0;bottom:0;height:3px;will-change:width}.dplayer-controller .dplayer-bar-wrap .dplayer-bar .dplayer-played .dplayer-thumb{position:absolute;top:0;right:5px;margin-top:-4px;margin-right:-10px;height:11px;width:11px;border-radius:50%;cursor:pointer;transition:all .3s ease-in-out;transform:scale(0)}.dplayer-controller .dplayer-icons{height:38px;position:absolute;bottom:0}.dplayer-controller .dplayer-icons.dplayer-comment-box{display:none;position:absolute;transition:all .3s ease-in-out;z-index:2;height:38px;bottom:0;left:20px;right:20px;color:#fff}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-icon{padding:7px}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-icon{position:absolute;left:0;top:0}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-send-icon{position:absolute;right:0;top:0}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box{position:absolute;background:rgba(28,28,28,.9);bottom:41px;left:0;box-shadow:0 0 25px rgba(0,0,0,.3);border-radius:4px;padding:10px 10px 16px;font-size:14px;width:204px;transition:all .3s ease-in-out;transform:scale(0)}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box.dplayer-comment-setting-open{transform:scale(1)}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box input[type=radio]{display:none}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box label{cursor:pointer}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-title{font-size:13px;color:#fff;line-height:30px}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type{font-size:0}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type .dplayer-comment-setting-title{margin-bottom:6px}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type label:nth-child(2) span{border-radius:4px 0 0 4px}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type label:nth-child(4) span{border-radius:0 4px 4px 0}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type span{width:33%;padding:4px 6px;line-height:16px;display:inline-block;font-size:12px;color:#fff;border:1px solid #fff;margin-right:-1px;box-sizing:border-box;text-align:center;cursor:pointer}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-type input:checked+span{background:#e4e4e6;color:#1c1c1c}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color{font-size:0}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color label{font-size:0;padding:6px;display:inline-block}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color span{width:22px;height:22px;display:inline-block;border-radius:50%;box-sizing:border-box;cursor:pointer}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-setting-box .dplayer-comment-setting-color span:hover{-webkit-animation:my-face 5s ease-in-out infinite;animation:my-face 5s ease-in-out infinite}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input{outline:none;border:none;padding:8px 31px;font-size:14px;line-height:18px;text-align:center;border-radius:4px;background:none;margin:0;height:100%;box-sizing:border-box;width:100%;color:#fff}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input::-webkit-input-placeholder{color:#fff;opacity:.8}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input::-moz-placeholder{color:#fff;opacity:.8}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input:-ms-input-placeholder{color:#fff;opacity:.8}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input::-ms-input-placeholder{color:#fff;opacity:.8}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input::placeholder{color:#fff;opacity:.8}.dplayer-controller .dplayer-icons.dplayer-comment-box .dplayer-comment-input::-ms-clear{display:none}.dplayer-controller .dplayer-icons.dplayer-icons-left .dplayer-icon{padding:7px}.dplayer-controller .dplayer-icons.dplayer-icons-right{right:20px}.dplayer-controller .dplayer-icons.dplayer-icons-right .dplayer-icon{padding:8px}.dplayer-controller .dplayer-icons .dplayer-live-badge,.dplayer-controller .dplayer-icons .dplayer-time{line-height:38px;color:#eee;text-shadow:0 0 2px rgba(0,0,0,.5);vertical-align:middle;font-size:13px;cursor:default}.dplayer-controller .dplayer-icons .dplayer-live-dot{display:inline-block;width:6px;height:6px;vertical-align:4%;margin-right:5px;content:"";border-radius:6px}.dplayer-controller .dplayer-icons .dplayer-icon{width:40px;height:100%;border:none;background-color:transparent;outline:none;cursor:pointer;vertical-align:middle;box-sizing:border-box;display:inline-block}.dplayer-controller .dplayer-icons .dplayer-icon .dplayer-icon-content{transition:all .2s ease-in-out;opacity:.8}.dplayer-controller .dplayer-icons .dplayer-icon:hover .dplayer-icon-content{opacity:1}.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-quality-icon{color:#fff;width:auto;line-height:22px;font-size:14px}.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-comment-icon{padding:10px 9px 9px}.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-setting-icon{padding-top:8.5px}.dplayer-controller .dplayer-icons .dplayer-icon.dplayer-volume-icon{width:43px}.dplayer-controller .dplayer-icons .dplayer-volume{position:relative;display:inline-block;cursor:pointer;height:100%}.dplayer-controller .dplayer-icons .dplayer-volume:hover .dplayer-volume-bar-wrap .dplayer-volume-bar{width:45px}.dplayer-controller .dplayer-icons .dplayer-volume:hover .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb{transform:scale(1)}.dplayer-controller .dplayer-icons .dplayer-volume.dplayer-volume-active .dplayer-volume-bar-wrap .dplayer-volume-bar{width:45px}.dplayer-controller .dplayer-icons .dplayer-volume.dplayer-volume-active .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb{transform:scale(1)}.dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap{display:inline-block;margin:0 10px 0 -5px;vertical-align:middle;height:100%}.dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap .dplayer-volume-bar{position:relative;top:17px;width:0;height:3px;background:#aaa;transition:all .3s ease-in-out}.dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner{position:absolute;bottom:0;left:0;height:100%;transition:all .1s ease;will-change:width}.dplayer-controller .dplayer-icons .dplayer-volume .dplayer-volume-bar-wrap .dplayer-volume-bar .dplayer-volume-bar-inner .dplayer-thumb{position:absolute;top:0;right:5px;margin-top:-4px;margin-right:-10px;height:11px;width:11px;border-radius:50%;cursor:pointer;transition:all .3s ease-in-out;transform:scale(0)}.dplayer-controller .dplayer-icons .dplayer-setting,.dplayer-controller .dplayer-icons .dplayer-subtitle-btn{display:inline-block;height:100%}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box{position:absolute;right:0;bottom:50px;transform:scale(0);width:150px;border-radius:2px;background:rgba(28,28,28,.9);padding:7px 0;transition:all .3s ease-in-out;overflow:hidden;z-index:2}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box>div{display:none}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box>div.dplayer-setting-origin-panel{display:block}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-open{transform:scale(1)}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-narrow{width:70px;text-align:center}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-speed .dplayer-setting-origin-panel{display:none}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-box.dplayer-setting-box-speed .dplayer-setting-speed-panel{display:block}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-item,.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-speed-item{height:30px;padding:5px 10px;box-sizing:border-box;cursor:pointer;position:relative}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-item:hover,.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-speed-item:hover{background-color:hsla(0,0%,100%,.1)}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku{padding:5px 0}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-label{padding:0 10px;display:inline}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku:hover .dplayer-label{display:none}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku:hover .dplayer-danmaku-bar-wrap{display:inline-block}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku.dplayer-setting-danmaku-active .dplayer-label{display:none}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku.dplayer-setting-danmaku-active .dplayer-danmaku-bar-wrap{display:inline-block}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap{padding:0 10px;box-sizing:border-box;display:none;vertical-align:middle;height:100%;width:100%}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap .dplayer-danmaku-bar{position:relative;top:8.5px;width:100%;height:3px;background:#fff;transition:all .3s ease-in-out}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap .dplayer-danmaku-bar .dplayer-danmaku-bar-inner{position:absolute;bottom:0;left:0;height:100%;transition:all .1s ease;background:#aaa;will-change:width}.dplayer-controller .dplayer-icons .dplayer-setting .dplayer-setting-danmaku .dplayer-danmaku-bar-wrap .dplayer-danmaku-bar .dplayer-danmaku-bar-inner .dplayer-thumb{position:absolute;top:0;right:5px;margin-top:-4px;margin-right:-10px;height:11px;width:11px;border-radius:50%;cursor:pointer;transition:all .3s ease-in-out;background:#aaa}.dplayer-controller .dplayer-icons .dplayer-full{display:inline-block;height:100%;position:relative}.dplayer-controller .dplayer-icons .dplayer-full:hover .dplayer-full-in-icon{display:block}.dplayer-controller .dplayer-icons .dplayer-full .dplayer-full-in-icon{position:absolute;top:-30px;z-index:1;display:none}.dplayer-controller .dplayer-icons .dplayer-quality{position:relative;display:inline-block;height:100%;z-index:2}.dplayer-controller .dplayer-icons .dplayer-quality:hover .dplayer-quality-list,.dplayer-controller .dplayer-icons .dplayer-quality:hover .dplayer-quality-mask{display:block}.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-mask{display:none;position:absolute;bottom:38px;left:-18px;width:80px;padding-bottom:12px}.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-list{display:none;font-size:12px;width:80px;border-radius:2px;background:rgba(28,28,28,.9);padding:5px 0;transition:all .3s ease-in-out;overflow:hidden;color:#fff;text-align:center}.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-item{height:25px;box-sizing:border-box;cursor:pointer;line-height:25px}.dplayer-controller .dplayer-icons .dplayer-quality .dplayer-quality-item:hover{background-color:hsla(0,0%,100%,.1)}.dplayer-controller .dplayer-icons .dplayer-comment{display:inline-block;height:100%}.dplayer-controller .dplayer-icons .dplayer-label{color:#eee;font-size:13px;display:inline-block;vertical-align:middle;white-space:nowrap}.dplayer-controller .dplayer-icons .dplayer-toggle{width:32px;height:20px;text-align:center;font-size:0;vertical-align:middle;position:absolute;top:5px;right:10px}.dplayer-controller .dplayer-icons .dplayer-toggle input{max-height:0;max-width:0;display:none}.dplayer-controller .dplayer-icons .dplayer-toggle input+label{display:inline-block;position:relative;box-shadow:inset 0 0 0 0 #dfdfdf;border:1px solid #dfdfdf;height:20px;width:32px;border-radius:10px;box-sizing:border-box;cursor:pointer;transition:.2s ease-in-out}.dplayer-controller .dplayer-icons .dplayer-toggle input+label:after,.dplayer-controller .dplayer-icons .dplayer-toggle input+label:before{content:"";position:absolute;display:block;height:18px;width:18px;top:0;left:0;border-radius:15px;transition:.2s ease-in-out}.dplayer-controller .dplayer-icons .dplayer-toggle input+label:after{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.4)}.dplayer-controller .dplayer-icons .dplayer-toggle input:checked+label{border-color:hsla(0,0%,100%,.5)}.dplayer-controller .dplayer-icons .dplayer-toggle input:checked+label:before{width:30px;background:hsla(0,0%,100%,.5)}.dplayer-controller .dplayer-icons .dplayer-toggle input:checked+label:after{left:12px}.dplayer-mobile-play{display:none;width:50px;height:50px;border:none;background-color:transparent;outline:none;cursor:pointer;box-sizing:border-box;bottom:0;opacity:.8;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}.dplayer-danmaku{position:absolute;left:0;right:0;top:0;bottom:0;font-size:22px;color:#fff}.dplayer-danmaku .dplayer-danmaku-item{display:inline-block;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default;white-space:nowrap;text-shadow:.5px .5px .5px rgba(0,0,0,.5)}.dplayer-danmaku .dplayer-danmaku-item--demo{position:absolute;visibility:hidden}.dplayer-danmaku .dplayer-danmaku-right{position:absolute;right:0;transform:translateX(100%)}.dplayer-danmaku .dplayer-danmaku-right.dplayer-danmaku-move{will-change:transform;-webkit-animation:danmaku 5s linear;animation:danmaku 5s linear;-webkit-animation-play-state:paused;animation-play-state:paused}@-webkit-keyframes danmaku{0%{transform:translateX(100%)}}@keyframes danmaku{0%{transform:translateX(100%)}}.dplayer-danmaku .dplayer-danmaku-bottom,.dplayer-danmaku .dplayer-danmaku-top{position:absolute;width:100%;text-align:center;visibility:hidden}.dplayer-danmaku .dplayer-danmaku-bottom.dplayer-danmaku-move,.dplayer-danmaku .dplayer-danmaku-top.dplayer-danmaku-move{will-change:visibility;-webkit-animation:danmaku-center 4s linear;animation:danmaku-center 4s linear;-webkit-animation-play-state:paused;animation-play-state:paused}@-webkit-keyframes danmaku-center{0%{visibility:visible}to{visibility:visible}}@keyframes danmaku-center{0%{visibility:visible}to{visibility:visible}}.dplayer-logo{pointer-events:none;position:absolute;left:20px;top:20px;max-width:50px;max-height:50px}.dplayer-logo img{max-width:100%;max-height:100%;background:none}.dplayer-menu{position:absolute;width:170px;border-radius:2px;background:rgba(28,28,28,.85);padding:5px 0;overflow:hidden;z-index:3;display:none}.dplayer-menu.dplayer-menu-show{display:block}.dplayer-menu .dplayer-menu-item{height:30px;box-sizing:border-box;cursor:pointer}.dplayer-menu .dplayer-menu-item:hover{background-color:hsla(0,0%,100%,.1)}.dplayer-menu .dplayer-menu-item a{padding:0 10px;line-height:30px;color:#eee;font-size:13px;display:inline-block;vertical-align:middle;width:100%;box-sizing:border-box;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.dplayer-menu .dplayer-menu-item a:hover{text-decoration:none}.dplayer-notice{opacity:0;position:absolute;bottom:60px;left:20px;font-size:14px;border-radius:2px;background:rgba(28,28,28,.9);padding:7px 20px;transition:all .3s ease-in-out;overflow:hidden;color:#fff;pointer-events:none}.dplayer-subtitle{position:absolute;bottom:40px;width:90%;left:5%;text-align:center;color:#fff;text-shadow:.5px .5px .5px rgba(0,0,0,.5);font-size:20px}.dplayer-subtitle.dplayer-subtitle-hide{display:none}.dplayer-mask{position:absolute;top:0;bottom:0;left:0;right:0;z-index:1;display:none}.dplayer-mask.dplayer-mask-show{display:block}.dplayer-video-wrap{position:relative;background:#000;font-size:0;width:100%;height:100%}.dplayer-video-wrap .dplayer-video{width:100%;height:100%;display:none}.dplayer-video-wrap .dplayer-video-current{display:block}.dplayer-video-wrap .dplayer-video-prepare{display:none}.dplayer-info-panel{position:absolute;top:10px;left:10px;width:400px;background:rgba(28,28,28,.8);padding:10px;color:#fff;font-size:12px;border-radius:2px}.dplayer-info-panel-hide{display:none}.dplayer-info-panel .dplayer-info-panel-close{cursor:pointer;position:absolute;right:10px;top:10px}.dplayer-info-panel .dplayer-info-panel-item>span{display:inline-block;vertical-align:middle;line-height:15px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.dplayer-info-panel .dplayer-info-panel-item-title{width:100px;text-align:right;margin-right:10px}.dplayer-info-panel .dplayer-info-panel-item-data{width:260px}</style>
+    <script>
+                
+        window.G_CONFIG = {
+            katex: true,
+            imgUrl: "https://277.27.gs.cn/usr/themes/G/static/img/",
+            autoTOC: false,
+            nightSpan: "",
+            nightMode: "",
+        };
+
+        function custom_callback() {
+                    }
+    </script>
+</head>
+<body>
+
+<div id="main">
+    <header id="header">
+        <div id="header-title">
+            <h2>福佳廿七</h2>
+        </div>
+        <div id="header-content">
+            <div id="header-content-left">
+                <p>兆運福佳時來祥瑞                </p>
+            </div>
+            <div id="header-content-right">
+                <nav>
+                    <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2F" target="_top" data-pjax-state="">首页</a>
+                                                                                                                                                            <a class="nav-focus" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F217.html" target="_top" title="暖煙桃源" data-pjax-state="">暖煙桃源</a>
+                                                                                        <a href="#" class="search-form-input" data-pjax-state="">搜索</a>
+                                    </nav>
+            </div>
+        </div>
+                    <img src="assets/bb3c998c2a4435a5.png" alt="福佳廿七" id="header-background">
+        
+    </header>
+
+<style>
+    :root{
+        --YEAR_TOP_GAP: 26px;
+        --YEAR_BOTTOM_GAP: 12px;
+        --DATE_OPACITY: 0.78;
+    }
+
+    #timeline .year-title{
+        display:flex;
+        justify-content:space-between;
+        align-items:baseline;
+        margin-top: var(--YEAR_TOP_GAP);
+        margin-bottom: var(--YEAR_BOTTOM_GAP);
+        padding-bottom:10px;
+        border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+    #timeline .year-title .year-text{
+        font-family:"Noto Serif SC", serif;
+        font-size:0.9em;
+        font-weight:500;
+        color: inherit;
+        white-space: nowrap;
+    }
+    #timeline .archive-date{
+        color: inherit;
+        opacity: var(--DATE_OPACITY);
+        line-height:1;
+        white-space: nowrap;
+    }
+    @media (prefers-color-scheme: light) {
+        #timeline .year-title .year-text{ color:#000; }
+    }
+</style>
+
+<script>
+(function(){
+  const ENABLE_LUNAR = true;
+  const MAX_CONCURRENCY = 12;
+  const REPLACE_TEXT_WHEN_FAIL = false;
+  const CACHE_PREFIX = 'lunar_v8:';
+
+  const LUNAR_REGEX =
+    /([甲乙丙丁戊己庚辛壬癸][子丑寅卯辰巳午未申酉戌亥](?:闰)?(?:正|冬|腊|[一二三四五六七八九十]{1,3})月(?:初|十|廿|卅)?[一二三四五六七八九十]{1,3})/;
+
+  function getCache(k){ try { return localStorage.getItem(CACHE_PREFIX + k) || ''; } catch(e){ return ''; } }
+  function setCache(k,v){ try { localStorage.setItem(CACHE_PREFIX + k, v); } catch(e){} }
+
+  function extractLunarFromHTML(html){
+    try{
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const p = doc.querySelector('#post-banner p');
+      if (p) {
+        const txt = (p.textContent || '').replace(/\s+/g,' ').trim();
+        const m = txt.match(LUNAR_REGEX);
+        if (m && m[1]) return m[1];
+      }
+      const bodyTxt = (doc.body ? doc.body.textContent : '').replace(/\s+/g,' ').trim();
+      const m2 = bodyTxt.match(LUNAR_REGEX);
+      if (m2 && m[2]) return m2[1];
+    }catch(e){}
+    return '';
+  }
+
+  async function fetchLunar(permalink){
+    const cached = getCache(permalink);
+    if (cached) return cached;
+
+    const res = await fetch(permalink, { credentials:'same-origin' });
+    if(!res.ok) return '';
+
+    const html = await res.text();
+    const lunar = extractLunarFromHTML(html);
+    if (lunar) setCache(permalink, lunar);
+    return lunar;
+  }
+
+  function applyLunar(span, lunar){
+    if (!span) return;
+    if (lunar) {
+      span.textContent = lunar;
+      span.dataset.lunarOk = '1';
+    } else {
+      span.dataset.lunarFail = '1';
+      if (REPLACE_TEXT_WHEN_FAIL) span.textContent = '';
+    }
+  }
+
+  const queue = [];
+  const waitingSpans = new Map();
+  let running = 0;
+
+  function enqueue(url, span){
+    if (!url || !span) return;
+
+    if (!waitingSpans.has(url)) waitingSpans.set(url, new Set());
+    waitingSpans.get(url).add(span);
+
+    if (queue.indexOf(url) === -1) queue.push(url);
+    pump();
+  }
+
+  function pump(){
+    while (running < MAX_CONCURRENCY && queue.length){
+      const url = queue.shift();
+      running++;
+
+      fetchLunar(url).then(lunar=>{
+        const set = waitingSpans.get(url);
+        if (set) {
+          set.forEach(sp=>applyLunar(sp, lunar));
+          waitingSpans.delete(url);
+        }
+      }).catch(()=>{
+        const set = waitingSpans.get(url);
+        if (set) {
+          set.forEach(sp=>applyLunar(sp, ''));
+          waitingSpans.delete(url);
+        }
+      }).finally(()=>{
+        running--;
+        pump();
+      });
+    }
+  }
+
+  function scanAll(){
+    const spans = Array.from(document.querySelectorAll('span.archive-date[data-url]'));
+    spans.forEach(sp=>{
+      if (sp.dataset.lunarQueued === '1') return;
+      sp.dataset.lunarQueued = '1';
+
+      const url = sp.dataset.url;
+      if (!url) return;
+
+      const cached = getCache(url);
+      if (cached) { applyLunar(sp, cached); return; }
+
+      enqueue(url, sp);
+    });
+  }
+
+  function watchTimeline(){
+    const timeline = document.getElementById('timeline');
+    if (!timeline) return;
+
+    const mo = new MutationObserver((muts)=>{
+      let hit = false;
+      muts.forEach(m=>{
+        m.addedNodes && m.addedNodes.forEach(node=>{
+          if (!(node instanceof HTMLElement)) return;
+          if (node.matches && node.matches('span.archive-date[data-url]')) hit = true;
+          else if (node.querySelector && node.querySelector('span.archive-date[data-url]')) hit = true;
+        });
+      });
+      if (hit) scanAll();
+    });
+
+    mo.observe(timeline, { childList:true, subtree:true });
+  }
+
+  // 从农历日期提取干支年
+  function extractLunarYear(lunarDate) {
+    if (!lunarDate) return null;
+    const match = lunarDate.match(/^([甲乙丙丁戊己庚辛壬癸][子丑寅卯辰巳午未申酉戌亥])/);
+    return match ? match[1] : null;
+  }
+
+  // 查找或创建年份分组
+  function findOrCreateYearGroup(targetGanzhi) {
+    const timeline = document.getElementById('timeline');
+    
+    // 查找现有分组
+    const existingGroups = timeline.querySelectorAll('.archive-year');
+    for (const group of existingGroups) {
+      const titleSpan = group.querySelector('.year-text');
+      if (titleSpan && titleSpan.textContent.trim() === targetGanzhi) {
+        return group;
+      }
+    }
+    
+    // 创建新分组
+    const newGroup = document.createElement('div');
+    newGroup.className = 'archive-year';
+    newGroup.innerHTML = `
+      <h2 class="year-title">
+        <span class="year-text">${targetGanzhi}</span>
+      </h2>
+      <ul class="archive-list"></ul>
+    `;
+    timeline.appendChild(newGroup);
+    return newGroup;
+  }
+
+  // 修复农历年份冲突
+  function fixLunarYearConflicts() {
+    const timeline = document.getElementById('timeline');
+    if (!timeline) return;
+
+    // 扫描所有年份分组
+    const yearGroups = timeline.querySelectorAll('.archive-year');
+    const articlesToMove = [];
+
+    yearGroups.forEach(yearDiv => {
+      const titleSpan = yearDiv.querySelector('.year-text');
+      if (!titleSpan) return;
+      
+      const titleGanzhi = titleSpan.textContent.trim();
+      
+      // 检查该分组下的所有文章
+      const articles = yearDiv.querySelectorAll('.archive-item');
+      articles.forEach(item => {
+        const dateSpan = item.querySelector('.archive-date');
+        if (!dateSpan) return;
+        
+        const lunarDate = dateSpan.textContent.trim();
+        const articleGanzhi = extractLunarYear(lunarDate);
+        
+        // 检测冲突
+        if (articleGanzhi && articleGanzhi !== titleGanzhi) {
+          articlesToMove.push({
+            item: item,
+            fromGroup: yearDiv,
+            toGanzhi: articleGanzhi
+          });
+        }
+      });
+    });
+
+    // 执行移动（放到目标分组的最上边）
+    articlesToMove.forEach(({ item, toGanzhi }) => {
+      const targetGroup = findOrCreateYearGroup(toGanzhi);
+      const targetList = targetGroup.querySelector('.archive-list');
+      if (targetList) {
+        // 使用 prepend 放到最前面
+        targetList.prepend(item);
+      }
+    });
+
+    // 清理空分组
+    cleanupEmptyGroups();
+  }
+
+  // 清理空的分组
+  function cleanupEmptyGroups() {
+    const timeline = document.getElementById('timeline');
+    if (!timeline) return;
+
+    const groups = timeline.querySelectorAll('.archive-year');
+    groups.forEach(group => {
+      const articles = group.querySelectorAll('.archive-item');
+      if (articles.length === 0) {
+        group.remove();
+      }
+    });
+  }
+
+  function boot(){
+    if (!ENABLE_LUNAR) return;
+    scanAll();
+    watchTimeline();
+    setTimeout(scanAll, 200);
+    
+    // 延迟执行冲突修复
+    setTimeout(() => {
+      scanAll();
+      fixLunarYearConflicts();
+    }, 1000);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
+<div class="PAP" id="archives">
+    <div id="page-banner" class="PAP-banner ">
+                <div>
+            <h1 itemprop="name headline">暖煙桃源</h1>
+        </div>
+    </div>
+
+    <div id="archives-content">
+        <div id="tag-cloud">
+                                </div>
+
+        <div id="timeline">
+            <div class="archive-year"><h2 class="year-title">  <span class="year-text">丙午</span></h2><ul class="archive-list">                    <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F08%2F19%2F216.html" target="_top" title="啊，假期臨近尾聲了！" data-pjax-state="">
+                            啊，假期臨近尾聲了！                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/08/19/216.html" data-lunar-queued="1" data-lunar-ok="1">丙午七月初七</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F213.html" target="_top" title="臘月廿七" data-pjax-state="">
+                            臘月廿七                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/08/14/213.html" data-lunar-queued="1" data-lunar-ok="1">丙午七月初二</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F08%2F14%2F212.html" target="_top" title="冲突的位阶" data-pjax-state="">
+                            冲突的位阶                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/08/14/212.html" data-lunar-queued="1" data-lunar-ok="1">丙午七月初二</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F08%2F11%2F211.html" target="_top" title="●０●" data-pjax-state="">
+                            ●０●                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/08/11/211.html" data-lunar-queued="1" data-lunar-ok="1">丙午六月廿九</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F08%2F10%2F210.html" target="_top" title="由而，决断吧！" data-pjax-state="">
+                            由而，决断吧！                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/08/10/210.html" data-lunar-queued="1" data-lunar-ok="1">丙午六月廿八</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F08%2F04%2F209.html" target="_top" title="复在" data-pjax-state="">
+                            复在                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/08/04/209.html" data-lunar-queued="1" data-lunar-ok="1">丙午六月廿二</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F04%2F30%2F208.html" target="_top" title="贴李贺辞" data-pjax-state="">
+                            贴李贺辞                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/04/30/208.html" data-lunar-queued="1" data-lunar-ok="1">丙午三月十四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F04%2F20%2F207.html" target="_top" title="谷雨" data-pjax-state="">
+                            谷雨                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/04/20/207.html" data-lunar-queued="1" data-lunar-ok="1">丙午三月初四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F04%2F08%2F206.html" target="_top" title="DIPFS触发测试" data-pjax-state="">
+                            DIPFS触发测试                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/04/08/206.html" data-lunar-queued="1" data-lunar-ok="1">丙午二月廿一</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F04%2F08%2F204.html" target="_top" title="是夜" data-pjax-state="">
+                            是夜                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/04/08/204.html" data-lunar-queued="1" data-lunar-ok="1">丙午二月廿一</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F25%2F202.html" target="_top" title="早之" data-pjax-state="">
+                            早之                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/25/202.html" data-lunar-queued="1" data-lunar-ok="1">丙午二月初七</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F24%2F199.html" target="_top" title="丙午初雨" data-pjax-state="">
+                            丙午初雨                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/24/199.html" data-lunar-queued="1" data-lunar-ok="1">丙午二月初六</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F23%2F198.html" target="_top" title="诸阶冥疆定" data-pjax-state="">
+                            诸阶冥疆定                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/23/198.html" data-lunar-queued="1" data-lunar-ok="1">丙午二月初五</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F18%2F197-1.html" target="_top" title="唔唔" data-pjax-state="">
+                            唔唔                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/18/197-1.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月三十</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F13%2F197.html" target="_top" title="过" data-pjax-state="">
+                            过                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/13/197.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月廿五</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F09%2F195.html" target="_top" title="质感" data-pjax-state="">
+                            质感                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/09/195.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月廿一</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F09%2F194.html" target="_top" title="如意" data-pjax-state="">
+                            如意                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/09/194.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月廿一</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F06%2F191.html" target="_top" title="无题" data-pjax-state="">
+                            无题                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/06/191.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月十八</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F05%2F190.html" target="_top" title="惊蛰" data-pjax-state="">
+                            惊蛰                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/05/190.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月十七</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F03%2F188.html" target="_top" title="九九" data-pjax-state="">
+                            九九                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/03/188.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月十五</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F03%2F187.html" target="_top" title="亲安 / 十五" data-pjax-state="">
+                            亲安 / 十五                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/03/187.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月十五</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F02%2F185.html" target="_top" title="亲安" data-pjax-state="">
+                            亲安                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/02/185.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月十四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F03%2F02%2F183.html" target="_top" title="亲安  /   壹" data-pjax-state="">
+                            亲安  /   壹                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/03/02/183.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月十四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F02%2F26%2F181.html" target="_top" title="記録" data-pjax-state="">
+                            記録                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/02/26/181.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月初十</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F02%2F19%2F178.html" target="_top" title="贴近" data-pjax-state="">
+                            贴近                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/02/19/178.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月初三</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F02%2F17%2F177.html" target="_top" title="丙午馬" data-pjax-state="">
+                            丙午馬                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/02/17/177.html" data-lunar-queued="1" data-lunar-ok="1">丙午正月初一</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2026%2F01%2F15%2F164.html" target="_top" title="便携式文档新建窗口打开测试" data-pjax-state="">
+                            便携式文档新建窗口打开测试                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2026/01/15/164.html" data-lunar-queued="1" data-lunar-ok="1">乙巳冬月廿七</span>
+                    </li>
+            </ul></div><div class="archive-year"><h2 class="year-title">  <span class="year-text">乙巳</span></h2><ul class="archive-list">                    <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F12%2F13%2F162.html" target="_top" title="映雪" data-pjax-state="">
+                            映雪                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/12/13/162.html" data-lunar-queued="1" data-lunar-ok="1">乙巳十月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F12%2F07%2F161.html" target="_top" title="今日大雪" data-pjax-state="">
+                            今日大雪                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/12/07/161.html" data-lunar-queued="1" data-lunar-ok="1">乙巳十月十八</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F160.html" target="_top" title="也就是说" data-pjax-state="">
+                            也就是说                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/11/13/160.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F159.html" target="_top" title="所以，不证自明的是：" data-pjax-state="">
+                            所以，不证自明的是：                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/11/13/159.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F158.html" target="_top" title="所以，起风了！" data-pjax-state="">
+                            所以，起风了！                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/11/13/158.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F156.html" target="_top" title="回归程式" data-pjax-state="">
+                            回归程式                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/11/13/156.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F155.html" target="_top" title="存在的自证" data-pjax-state="">
+                            存在的自证                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/11/13/155.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F153.html" target="_top" title="看雪" data-pjax-state="">
+                            看雪                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/11/13/153.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F11%2F13%2F152.html" target="_top" title="雪天" data-pjax-state="">
+                            雪天                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/11/13/152.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月廿四</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F151.html" target="_top" title="畫兔" data-pjax-state="">
+                            畫兔                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/27/151.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初七</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F149.html" target="_top" title="百靈" data-pjax-state="">
+                            百靈                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/27/149.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初七</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F27%2F147.html" target="_top" title="南風" data-pjax-state="">
+                            南風                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/27/147.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初七</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F26%2F146.html" target="_top" title="任安" data-pjax-state="">
+                            任安                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/26/146.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初六</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F26%2F133.html" target="_top" title="乙巳九月初六" data-pjax-state="">
+                            乙巳九月初六                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/26/133.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初六</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F22%2F129.html" target="_top" title="(๑ت๑)" data-pjax-state="">
+                            (๑ت๑)                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/22/129.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初二</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F22%2F120.html" target="_top" title="春雨南風" data-pjax-state="">
+                            春雨南風                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/22/120.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初二</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F22%2F117.html" target="_top" title="可是要记住啊" data-pjax-state="">
+                            可是要记住啊                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/22/117.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初二</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F22%2F115.html" target="_top" title="书画处" data-pjax-state="">
+                            书画处                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/22/115.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初二</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F21%2F114.html" target="_top" title="看秋" data-pjax-state="">
+                            看秋                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/21/114.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初一</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F21%2F112.html" target="_top" title="佩玉年刊" data-pjax-state="">
+                            佩玉年刊                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/21/112.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初一</span>
+                    </li>
+                                <li class="archive-item">
+                        <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F2025%2F10%2F21%2F111.html" target="_top" title="有我之表" data-pjax-state="">
+                            有我之表                        </a>
+                        <span class="archive-date" data-url="https://277.27.gs.cn/index.php/2025/10/21/111.html" data-lunar-queued="1" data-lunar-ok="1">乙巳九月初一</span>
+                    </li>
+            </ul></div>        </div>
+    </div>
+</div>
+
+
+<footer>
+    <div id="footer-content">
+        <div id="footer-sponsor">
+            <img alt="logo" src="assets/7224ab5ffa303cab.png" origin="assets/7224ab5ffa303cab.png" class="lazyload-done">        </div>
+        <nav id="footer-nav">
+            <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2F" target="_top" data-pjax-state="">首页</a>
+                                                    <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2Fstart-page.html" target="_top" title="關於站點" data-pjax-state="">關於站點</a>
+                            <a href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2F217.html" target="_top" class="nav-focus" title="暖煙桃源" data-pjax-state="">暖煙桃源</a>
+                    </nav>
+    </div>
+    <p id="footer-meta" class="clear">
+        <span class="left"><a class="icp" href="https://beian.miit.gov.cn" rel="noopener noreferrer" data-pjax-state="">陇ICP备2024006021号</a></span>
+        <span class="right">2017 - 2026 © 福佳廿七</span>
+    </p>
+</footer>
+</div>
+<div id="dark-cover"></div>
+<div id="toolbar">
+    <div id="toolbar-container">
+        <span class="toolbar-btn" id="gototop">
+            <svg xmlns="http://www.w3.org/2000/svg" t="1563590875226" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="2844" width="128" height="128"><defs><style type="text/css"></style></defs><path d="M859.67 860.723L511.263 646.312 162.821 860.723l348.442-696.836L859.67 860.723z" p-id="2845" fill="#444444"></path></svg>
+        </span>
+
+                    <span class="toolbar-btn search-form-input" id="search">
+                <svg t="1649232624229" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3998" width="64" height="64"><path d="M447.325002 129.919978c-178.868807 0-323.872319 145.003512-323.872319 323.874365s145.003512 323.874365 323.872319 323.874365c178.870854 0 323.874365-145.003512 323.874365-323.874365S626.195855 129.919978 447.325002 129.919978zM447.325002 713.712071c-143.31915 0-259.915681-116.598578-259.915681-259.917728s116.596532-259.917728 259.915681-259.917728 259.917728 116.598578 259.917728 259.917728S590.643128 713.712071 447.325002 713.712071z" p-id="3999"></path><path d="M891.573945 840.061734 748.236376 696.699606c-13.43601 16.625656-28.371164 31.91385-44.338834 46.099944l142.458549 142.481062c6.246261 6.246261 14.427594 9.368368 22.60995 9.368368s16.363689-3.123131 22.60995-9.368368C904.065444 872.789113 904.065444 852.553233 891.573945 840.061734z" p-id="4000"></path></svg>
+            </span>
+        
+        <span class="toolbar-btn" id="darkmode">
+            <svg xmlns="http://www.w3.org/2000/svg" t="1600558361261" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="670" width="200" height="200"><defs><style type="text/css"></style></defs><path d="M472 991.6c-157 0-304.4-77.2-394.3-206.6-6.9-9.9-7.6-22.9-1.8-33.6 5.8-10.7 17.1-17.8 29.2-16.7l7.7 0.4c2.4 0.2 4.8 0.3 7.2 0.3 229.4 0 416-186.6 416-416 0-85-25.7-167-74.3-236.9-6.9-9.9-7.6-22.9-1.8-33.6 5.8-10.7 17.2-17.6 29.2-16.7C748.7 41.6 952 252.1 952 511.6c0 264.7-215.3 480-480 480zM169.7 797.1c78.1 82.7 187.2 130.6 302.3 130.6 229.4 0 416-186.6 416-416 0-204-144.9-373-339.7-408.6 34 66.9 51.7 140.7 51.7 216.6 0 247.8-188.9 452.4-430.3 477.4z" fill="#243154" p-id="671"></path></svg>
+        </span>
+        <span class="toolbar-btn" id="sidebar-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" t="1563592224000" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="1040" width="128" height="128"><defs><style type="text/css"></style></defs><path d="M921.6 454.656H223.232c-83.968 0-151.552-75.776-151.552-167.936s67.584-167.936 151.552-167.936H921.6c16.384 0 30.72 14.336 30.72 30.72v6.144c0 12.288-8.192 24.576-20.48 28.672-40.96 14.336-69.632 53.248-69.632 100.352 0 45.056 28.672 88.064 69.632 100.352 12.288 4.096 20.48 16.384 20.48 28.672v6.144c0 22.528-14.336 34.816-30.72 34.816zM223.232 182.272c-49.152 0-90.112 47.104-90.112 106.496s40.96 106.496 90.112 106.496h612.352c-22.528-28.672-34.816-65.536-34.816-106.496 0-38.912 12.288-75.776 34.816-106.496H223.232zM800.768 903.168H102.4c-16.384 0-30.72-14.336-30.72-30.72v-6.144c0-14.336 8.192-24.576 20.48-28.672 40.96-14.336 69.632-55.296 69.632-100.352 0-47.104-28.672-88.064-69.632-100.352-12.288-4.096-20.48-16.384-20.48-28.672v-6.144c0-16.384 14.336-30.72 30.72-30.72h698.368c83.968 0 151.552 75.776 151.552 167.936s-67.584 163.84-151.552 163.84z m-612.352-61.44h612.352c49.152 0 90.112-47.104 90.112-106.496s-40.96-106.496-90.112-106.496H188.416c22.528 28.672 34.816 65.536 34.816 106.496 0 38.912-12.288 75.776-34.816 106.496z" p-id="1041" fill="#444444"></path></svg>
+        </span>
+    </div>
+</div><div id="toc">
+    <div id="toc-container">
+        <h3>目录</h3>
+        <div id="toc-content"></div>
+        <span id="toc-close" onclick="toggleToc()">
+            <svg t="1636772786776" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2419" width="64" height="64"><path d="M343.104 319.008l-24.128 24.128 168.896 168.896-168.096 168.096 24.128 24.128 168.096-168.096 168.096 168.096 24.128-24.128-168.096-168.096 168.896-168.896-24.128-24.128-168.896 168.896z" p-id="2420"></path></svg>
+        </span>
+    </div>
+</div><div id="sliderbar" class="move-left">
+    <div class="sliderbar-content" id="profile">
+        <div class="profile-content">
+            <div class="profile-avatar-container">
+                <img id="profile-avatar" src="assets/0a236a3d21982c2b.png" alt="avatar">
+            </div>
+            <div class="profile-cover" style="background-image:url(assets/bb3c998c2a4435a5.png)"></div>
+            <h4>安然樂道近諦聽</h4>
+            <i>兆運福佳時來祥瑞</i>
+            <div class="profile-meta clear">
+                                <div class="articles">
+                    <p>48</p>
+                    <span>文章数</span>
+                </div>
+                <div class="reviews">
+                    <p>27</p>
+                    <span>评论数</span>
+                </div>
+                <div class="cats">
+                    <p>6</p>
+                    <span>分类</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="widgets">
+                <div class="widget category-list" style="width: 15rem;">
+            <div class="category-content">
+                <li><a onclick="toggleSidebar()" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2Fcategory%2F27-gs-cn%2F" target="_top" data-pjax-state="">祈安</a></li><li><a onclick="toggleSidebar()" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2Fcategory%2F77%2F" target="_top" data-pjax-state="">春雨</a></li><li><a onclick="toggleSidebar()" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2Fcategory%2F1727%2F" target="_top" data-pjax-state="">百靈</a></li><li><a onclick="toggleSidebar()" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2Fcategory%2F7721277%2F" target="_top" data-pjax-state="">时祺</a></li><li><a onclick="toggleSidebar()" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2Fcategory%2F97%2F" target="_top" data-pjax-state="">南風</a></li><li><a onclick="toggleSidebar()" href="https://dipfs.27.gs.cn/archive.html?url=https%3A%2F%2F277.27.gs.cn%2Findex.php%2Fcategory%2F77777%2F" target="_top" data-pjax-state="">畫兔</a></li>            </div>
+        </div>
+            </div>
+</div>
+<div id="sliderbar-cover" onclick="toggleSidebar()"></div><script src="assets/940e12e187ba2d4d.js"></script>
+<script src="assets/aed6f7f6f117d3a4.js"></script>
+
+<script src="assets/46f9fd671d756ea5.js"></script>
+    <script src="assets/8bfd8c947ecb2e9b.js"></script>
+    <script src="assets/4730707c3c402734.js"></script>
+<script src="assets/98802e9cc169af9a.js" defer=""></script>
+<script src="assets/e0ebd38b2e539f67.js"></script>
+<script src="assets/91ae880ec4959c9c.js"></script>
+<script src="assets/ac91dfd8441d5e4b.js"></script>
+<script src="assets/f5a1121ca31c1a88.js"></script>
+<script src="assets/80e4a6c9afb38eff.js" data-manual=""></script>
+<script src="assets/24c06974eaa55647.js"></script>
+<script>
+    </script>
+
+<script src="assets/940e12e187ba2d4d.js"></script>
+<script src="assets/aed6f7f6f117d3a4.js"></script><div class="ins-search"><div class="ins-search-overlay"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="搜索点什么吧..."><span class="ins-close ins-selectable"><i class="iconfont icon-close"></i></span></div><div class="ins-section-wrapper"><div class="ins-section-container"><section class="ins-section"><div class="ins-section-header">文章</div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/19/216.html"><div class="header"><i class="iconfont icon-file"></i>啊，假期臨近尾聲了！</div><p class="ins-search-preview">嗯，這個假期是非常沉浸的一段时间。去完全关注一些事情，产生诸多包含噪音的想法，但是想要变得清澈，就需要将想法去延展开来，可能这也是福佳廿七单独设当的一个原因吧，</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/14/213.html"><div class="header"><i class="iconfont icon-file"></i>臘月廿七</div><p class="ins-search-preview">那一年的臘月廿七，是立春的節氣，遇見故鄉的日子。星星鋪滿了天幕。我看得清楚。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/14/212.html"><div class="header"><i class="iconfont icon-file"></i>冲突的位阶</div><p class="ins-search-preview">意义在冲突中永远排于第一位，那是冲突的彼岸，暴力是理性的无能，由得感性更显超然。暴力与征服相之，但却偏居挑战与对抗之同一。善恶更为感知，却具审判定夺之阶。因为这</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/11/211.html"><div class="header"><i class="iconfont icon-file"></i>●０●</div><p class="ins-search-preview">是的，我在确信一件事必然可行，并会得到极大波动上，丧失了本该有的信心。我意识到了。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/10/210.html"><div class="header"><i class="iconfont icon-file"></i>由而，决断吧！</div><p class="ins-search-preview">决断是难以做出的，这无异于对混沌事面的开辟。而决断指向的第一是在于意义，而意义指向的在于时间。要保持清醒并作出决断，就要明白时间，如果分歧要以超过时间的限度求得</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/04/209.html"><div class="header"><i class="iconfont icon-file"></i>复在</div><p class="ins-search-preview">是职业，不是兴趣。兴趣不具备承载责任的能力，也就意味着方向具有不可控性。看待两者，当然不能是以对立的视角，而是包含，人对特定事情的推进必然是以职业命名身份，而非</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/30/208.html"><div class="header"><i class="iconfont icon-file"></i>贴李贺辞</div><p class="ins-search-preview">黑云压城城欲摧，甲光向日金鳞开。角声满天秋色里，塞上燕脂凝夜紫。半卷红旗临易水，霜重鼓寒声不起。报君黄金台上意，提携玉龙为君死。唐 李贺 作，复制于：https</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/20/207.html"><div class="header"><i class="iconfont icon-file"></i>谷雨</div><p class="ins-search-preview">惊蛰、谷雨，上半年中有灵气的时节。好多脚踏实地的前行，信心与憧憬都发生期间。值在今日，以表纪念，勉之。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/08/206.html"><div class="header"><i class="iconfont icon-file"></i>DIPFS触发测试</div><p class="ins-search-preview">2026-4-8 01:27:15 一次测试：文章发布抓取勘测2026-4-8 02:01:43 二次测试：文章更新抓取勘测2026-4-8 02:33:20 </p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/08/204.html"><div class="header"><i class="iconfont icon-file"></i>是夜</div><p class="ins-search-preview">勿要忘过去，勿要忘将来。所以时间有四季，树木有年轮。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/25/202.html"><div class="header"><i class="iconfont icon-file"></i>早之</div><p class="ins-search-preview">晨钟三叩首，早晚一炷香。何位据此礼，上雍两丘仪。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/24/199.html"><div class="header"><i class="iconfont icon-file"></i>丙午初雨</div><p class="ins-search-preview">怜君故乡春，拂来嗅新泥。天涯终不远，雨雪是相识。徒无玲珑杯，劝我在乾坤。万侯同一道，诸象彼此间。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/23/198.html"><div class="header"><i class="iconfont icon-file"></i>诸阶冥疆定</div><p class="ins-search-preview">人的主体性过强或过弱，都会导致感性或情绪化的痕迹较重。认为一件事是残酷的，或者不该的。可这显然是主观的，往与他者相悖，算是常事。人道的价值判断的根基是肤浅且盲目</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/18/197-1.html"><div class="header"><i class="iconfont icon-file"></i>唔唔</div><p class="ins-search-preview">丙午正月要结束了！</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/13/197.html"><div class="header"><i class="iconfont icon-file"></i>过</div><p class="ins-search-preview">何以外番经而我土王，孰可小人群据有大仪典！可恶也，呜呼哀哉！</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/09/195.html"><div class="header"><i class="iconfont icon-file"></i>质感</div><p class="ins-search-preview">有个韩国博主在用苹果6s拍视频，可能是人，也可能就是相机或拍摄手法的问题，看起来很酷！</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/09/194.html"><div class="header"><i class="iconfont icon-file"></i>如意</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/06/191.html"><div class="header"><i class="iconfont icon-file"></i>无题</div><p class="ins-search-preview">这两天回去一会倒头就睡，一觉天明，感觉很好，脑袋沉沉的、平平的。我依旧很浮躁，真的安安静静做一个月的事情一切都会好起来，可每天看着窗外雪要化，我就会急。可是讲道</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/05/190.html"><div class="header"><i class="iconfont icon-file"></i>惊蛰</div><p class="ins-search-preview">春日朝朝雪，邀君莫失忘。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/03/188.html"><div class="header"><i class="iconfont icon-file"></i>九九</div><p class="ins-search-preview">今天是九九第一天。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/03/187.html"><div class="header"><i class="iconfont icon-file"></i>亲安 / 十五</div><p class="ins-search-preview">是正月十五啊！我闻到了硝烟味，听到了鞭炮声，看见白雪再降於清晨。祈愿顺遂！亲安</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/02/185.html"><div class="header"><i class="iconfont icon-file"></i>亲安</div><p class="ins-search-preview">是落了雪，在雪要落。看雪失泪，藏不住苍茫溃迹。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/02/183.html"><div class="header"><i class="iconfont icon-file"></i>亲安  /   壹</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/02/26/181.html"><div class="header"><i class="iconfont icon-file"></i>記録</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/02/19/178.html"><div class="header"><i class="iconfont icon-file"></i>贴近</div><p class="ins-search-preview">生活在本质上是不存在对错之分，譬如斗转星移不以明暗为据。生活是生存的事实和贴近事实的行为。而生活只能构成事实的可知部分，而我们走向事实的路径，则是道阐释其自我的</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/02/17/177.html"><div class="header"><i class="iconfont icon-file"></i>丙午馬</div><p class="ins-search-preview">皇明崇祯三百九十九年。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/01/15/164.html"><div class="header"><i class="iconfont icon-file"></i>便携式文档新建窗口打开测试</div><p class="ins-search-preview">一次测试&lt;a https://277.27.gs.cn/usr/uploads/2026/01/3442986495.pdf"&nbsp; &nbsp;target="_bl</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/12/13/162.html"><div class="header"><i class="iconfont icon-file"></i>映雪</div><p class="ins-search-preview">文章还是自己出，真名还得我来书。他年江南今年春，晴晴风物蝶蝶舞。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/12/07/161.html"><div class="header"><i class="iconfont icon-file"></i>今日大雪</div><p class="ins-search-preview">宋帝投海自尽，末主吊上煤山。义为天下之端，我亡四海不现。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/160.html"><div class="header"><i class="iconfont icon-file"></i>也就是说</div><p class="ins-search-preview">存在通过生存自证，而生存依靠存在维持，若无存在，生存即是消亡。於  鵉春</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/159.html"><div class="header"><i class="iconfont icon-file"></i>所以，不证自明的是：</div><p class="ins-search-preview">存在绝无向生存妥协的可能，否则存在无法称之为存在。於  鵉春</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/158.html"><div class="header"><i class="iconfont icon-file"></i>所以，起风了！</div><p class="ins-search-preview">@(nidongde)</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/156.html"><div class="header"><i class="iconfont icon-file"></i>回归程式</div><p class="ins-search-preview">而因存在的虚无，其自证以生存本成，并以生存系坐标，而镜像自我，完成回归。是存在的自程式，并于生存的仪式做区分，避免陷入混淆的沼泽。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/155.html"><div class="header"><i class="iconfont icon-file"></i>存在的自证</div><p class="ins-search-preview">如果说，存在是有源的无限力，而存在又高于生存，那存在必须自证，而非他证或合同，因为存在不止居于审判，而是造物。於  鵉春</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/153.html"><div class="header"><i class="iconfont icon-file"></i>看雪</div><p class="ins-search-preview">已经做了极致的计划，所有的东西都已具备。可我丧失开始的欲望和动力。才知万事开头难，确是开头难。对人性的失望，致使山脏水垢的幻觉愈发浓重。诸灵在秩序里肃然，力量之</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/152.html"><div class="header"><i class="iconfont icon-file"></i>雪天</div><p class="ins-search-preview">看一个单纯的姑娘短短几年变得市侩俗气是一件很残忍的事情，我究不了原因。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/27/151.html"><div class="header"><i class="iconfont icon-file"></i>畫兔</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/27/149.html"><div class="header"><i class="iconfont icon-file"></i>百靈</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/27/147.html"><div class="header"><i class="iconfont icon-file"></i>南風</div><p class="ins-search-preview">天光驱寒日南风绕冷郊群鸟舐新羽百花媚红装轻烟舞乱朦胧色夜月恨不白昼升</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/26/146.html"><div class="header"><i class="iconfont icon-file"></i>任安</div><p class="ins-search-preview">万般。谓燕云侍。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/26/133.html"><div class="header"><i class="iconfont icon-file"></i>乙巳九月初六</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/129.html"><div class="header"><i class="iconfont icon-file"></i>(๑ت๑)</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/120.html"><div class="header"><i class="iconfont icon-file"></i>春雨南風</div><p class="ins-search-preview">@(taikaixin)</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/117.html"><div class="header"><i class="iconfont icon-file"></i>可是要记住啊</div><p class="ins-search-preview">啊可是要记住啊去做自己的事情还有理性的推理时间是演算的草稿逻辑呈现不变的径向 @(hehe)</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/115.html"><div class="header"><i class="iconfont icon-file"></i>书画处</div><p class="ins-search-preview">https://17.27.gs.cn</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/21/114.html"><div class="header"><i class="iconfont icon-file"></i>看秋</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/21/112.html"><div class="header"><i class="iconfont icon-file"></i>佩玉年刊</div><p class="ins-search-preview">https://27.gs.cn</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/21/111.html"><div class="header"><i class="iconfont icon-file"></i>有我之表</div><p class="ins-search-preview">https://21277.27.gs.cn</p></div></section><section class="ins-section"><div class="ins-section-header">页面</div><div class="ins-selectable ins-search-item" data-url="/index.php/start-page.html"><div class="header"><i class="iconfont icon-file"></i>關於站點</div><p class="ins-search-preview">站點保留中華人民共和國及相關國際法律賦予的所有權利。詳見：佩玉廿七 (27.GS.CN) 網站法律聲明感謝為本站運行提供各項支持的產品。詳見：站點使用之致謝辛丑</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/217.html"><div class="header"><i class="iconfont icon-file"></i>暖煙桃源</div></div></section><section class="ins-section"><div class="ins-section-header">分类</div><div class="ins-selectable ins-search-item" data-url="/index.php/category/97/"><div class="header"><i class="iconfont icon-folder"></i>南風<span class="ins-slug">97</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/27-gs-cn/"><div class="header"><i class="iconfont icon-folder"></i>祈安<span class="ins-slug">27-gs-cn</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/7721277/"><div class="header"><i class="iconfont icon-folder"></i>时祺<span class="ins-slug">7721277</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/77/"><div class="header"><i class="iconfont icon-folder"></i>春雨<span class="ins-slug">77</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/77777/"><div class="header"><i class="iconfont icon-folder"></i>畫兔<span class="ins-slug">77777</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/1727/"><div class="header"><i class="iconfont icon-folder"></i>百靈<span class="ins-slug">1727</span></div></div></section></div></div></div></div><div class="ins-search"><div class="ins-search-overlay"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="搜索点什么吧..."><span class="ins-close ins-selectable"><i class="iconfont icon-close"></i></span></div><div class="ins-section-wrapper"><div class="ins-section-container"><section class="ins-section"><div class="ins-section-header">文章</div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/19/216.html"><div class="header"><i class="iconfont icon-file"></i>啊，假期臨近尾聲了！</div><p class="ins-search-preview">嗯，這個假期是非常沉浸的一段时间。去完全关注一些事情，产生诸多包含噪音的想法，但是想要变得清澈，就需要将想法去延展开来，可能这也是福佳廿七单独设当的一个原因吧，</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/14/213.html"><div class="header"><i class="iconfont icon-file"></i>臘月廿七</div><p class="ins-search-preview">那一年的臘月廿七，是立春的節氣，遇見故鄉的日子。星星鋪滿了天幕。我看得清楚。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/14/212.html"><div class="header"><i class="iconfont icon-file"></i>冲突的位阶</div><p class="ins-search-preview">意义在冲突中永远排于第一位，那是冲突的彼岸，暴力是理性的无能，由得感性更显超然。暴力与征服相之，但却偏居挑战与对抗之同一。善恶更为感知，却具审判定夺之阶。因为这</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/11/211.html"><div class="header"><i class="iconfont icon-file"></i>●０●</div><p class="ins-search-preview">是的，我在确信一件事必然可行，并会得到极大波动上，丧失了本该有的信心。我意识到了。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/10/210.html"><div class="header"><i class="iconfont icon-file"></i>由而，决断吧！</div><p class="ins-search-preview">决断是难以做出的，这无异于对混沌事面的开辟。而决断指向的第一是在于意义，而意义指向的在于时间。要保持清醒并作出决断，就要明白时间，如果分歧要以超过时间的限度求得</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/08/04/209.html"><div class="header"><i class="iconfont icon-file"></i>复在</div><p class="ins-search-preview">是职业，不是兴趣。兴趣不具备承载责任的能力，也就意味着方向具有不可控性。看待两者，当然不能是以对立的视角，而是包含，人对特定事情的推进必然是以职业命名身份，而非</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/30/208.html"><div class="header"><i class="iconfont icon-file"></i>贴李贺辞</div><p class="ins-search-preview">黑云压城城欲摧，甲光向日金鳞开。角声满天秋色里，塞上燕脂凝夜紫。半卷红旗临易水，霜重鼓寒声不起。报君黄金台上意，提携玉龙为君死。唐 李贺 作，复制于：https</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/20/207.html"><div class="header"><i class="iconfont icon-file"></i>谷雨</div><p class="ins-search-preview">惊蛰、谷雨，上半年中有灵气的时节。好多脚踏实地的前行，信心与憧憬都发生期间。值在今日，以表纪念，勉之。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/08/206.html"><div class="header"><i class="iconfont icon-file"></i>DIPFS触发测试</div><p class="ins-search-preview">2026-4-8 01:27:15 一次测试：文章发布抓取勘测2026-4-8 02:01:43 二次测试：文章更新抓取勘测2026-4-8 02:33:20 </p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/04/08/204.html"><div class="header"><i class="iconfont icon-file"></i>是夜</div><p class="ins-search-preview">勿要忘过去，勿要忘将来。所以时间有四季，树木有年轮。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/25/202.html"><div class="header"><i class="iconfont icon-file"></i>早之</div><p class="ins-search-preview">晨钟三叩首，早晚一炷香。何位据此礼，上雍两丘仪。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/24/199.html"><div class="header"><i class="iconfont icon-file"></i>丙午初雨</div><p class="ins-search-preview">怜君故乡春，拂来嗅新泥。天涯终不远，雨雪是相识。徒无玲珑杯，劝我在乾坤。万侯同一道，诸象彼此间。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/23/198.html"><div class="header"><i class="iconfont icon-file"></i>诸阶冥疆定</div><p class="ins-search-preview">人的主体性过强或过弱，都会导致感性或情绪化的痕迹较重。认为一件事是残酷的，或者不该的。可这显然是主观的，往与他者相悖，算是常事。人道的价值判断的根基是肤浅且盲目</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/18/197-1.html"><div class="header"><i class="iconfont icon-file"></i>唔唔</div><p class="ins-search-preview">丙午正月要结束了！</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/13/197.html"><div class="header"><i class="iconfont icon-file"></i>过</div><p class="ins-search-preview">何以外番经而我土王，孰可小人群据有大仪典！可恶也，呜呼哀哉！</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/09/195.html"><div class="header"><i class="iconfont icon-file"></i>质感</div><p class="ins-search-preview">有个韩国博主在用苹果6s拍视频，可能是人，也可能就是相机或拍摄手法的问题，看起来很酷！</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/09/194.html"><div class="header"><i class="iconfont icon-file"></i>如意</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/06/191.html"><div class="header"><i class="iconfont icon-file"></i>无题</div><p class="ins-search-preview">这两天回去一会倒头就睡，一觉天明，感觉很好，脑袋沉沉的、平平的。我依旧很浮躁，真的安安静静做一个月的事情一切都会好起来，可每天看着窗外雪要化，我就会急。可是讲道</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/05/190.html"><div class="header"><i class="iconfont icon-file"></i>惊蛰</div><p class="ins-search-preview">春日朝朝雪，邀君莫失忘。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/03/188.html"><div class="header"><i class="iconfont icon-file"></i>九九</div><p class="ins-search-preview">今天是九九第一天。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/03/187.html"><div class="header"><i class="iconfont icon-file"></i>亲安 / 十五</div><p class="ins-search-preview">是正月十五啊！我闻到了硝烟味，听到了鞭炮声，看见白雪再降於清晨。祈愿顺遂！亲安</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/02/185.html"><div class="header"><i class="iconfont icon-file"></i>亲安</div><p class="ins-search-preview">是落了雪，在雪要落。看雪失泪，藏不住苍茫溃迹。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/03/02/183.html"><div class="header"><i class="iconfont icon-file"></i>亲安  /   壹</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/02/26/181.html"><div class="header"><i class="iconfont icon-file"></i>記録</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/02/19/178.html"><div class="header"><i class="iconfont icon-file"></i>贴近</div><p class="ins-search-preview">生活在本质上是不存在对错之分，譬如斗转星移不以明暗为据。生活是生存的事实和贴近事实的行为。而生活只能构成事实的可知部分，而我们走向事实的路径，则是道阐释其自我的</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/02/17/177.html"><div class="header"><i class="iconfont icon-file"></i>丙午馬</div><p class="ins-search-preview">皇明崇祯三百九十九年。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2026/01/15/164.html"><div class="header"><i class="iconfont icon-file"></i>便携式文档新建窗口打开测试</div><p class="ins-search-preview">一次测试&lt;a https://277.27.gs.cn/usr/uploads/2026/01/3442986495.pdf"&nbsp; &nbsp;target="_bl</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/12/13/162.html"><div class="header"><i class="iconfont icon-file"></i>映雪</div><p class="ins-search-preview">文章还是自己出，真名还得我来书。他年江南今年春，晴晴风物蝶蝶舞。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/12/07/161.html"><div class="header"><i class="iconfont icon-file"></i>今日大雪</div><p class="ins-search-preview">宋帝投海自尽，末主吊上煤山。义为天下之端，我亡四海不现。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/160.html"><div class="header"><i class="iconfont icon-file"></i>也就是说</div><p class="ins-search-preview">存在通过生存自证，而生存依靠存在维持，若无存在，生存即是消亡。於  鵉春</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/159.html"><div class="header"><i class="iconfont icon-file"></i>所以，不证自明的是：</div><p class="ins-search-preview">存在绝无向生存妥协的可能，否则存在无法称之为存在。於  鵉春</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/158.html"><div class="header"><i class="iconfont icon-file"></i>所以，起风了！</div><p class="ins-search-preview">@(nidongde)</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/156.html"><div class="header"><i class="iconfont icon-file"></i>回归程式</div><p class="ins-search-preview">而因存在的虚无，其自证以生存本成，并以生存系坐标，而镜像自我，完成回归。是存在的自程式，并于生存的仪式做区分，避免陷入混淆的沼泽。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/155.html"><div class="header"><i class="iconfont icon-file"></i>存在的自证</div><p class="ins-search-preview">如果说，存在是有源的无限力，而存在又高于生存，那存在必须自证，而非他证或合同，因为存在不止居于审判，而是造物。於  鵉春</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/153.html"><div class="header"><i class="iconfont icon-file"></i>看雪</div><p class="ins-search-preview">已经做了极致的计划，所有的东西都已具备。可我丧失开始的欲望和动力。才知万事开头难，确是开头难。对人性的失望，致使山脏水垢的幻觉愈发浓重。诸灵在秩序里肃然，力量之</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/11/13/152.html"><div class="header"><i class="iconfont icon-file"></i>雪天</div><p class="ins-search-preview">看一个单纯的姑娘短短几年变得市侩俗气是一件很残忍的事情，我究不了原因。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/27/151.html"><div class="header"><i class="iconfont icon-file"></i>畫兔</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/27/149.html"><div class="header"><i class="iconfont icon-file"></i>百靈</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/27/147.html"><div class="header"><i class="iconfont icon-file"></i>南風</div><p class="ins-search-preview">天光驱寒日南风绕冷郊群鸟舐新羽百花媚红装轻烟舞乱朦胧色夜月恨不白昼升</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/26/146.html"><div class="header"><i class="iconfont icon-file"></i>任安</div><p class="ins-search-preview">万般。谓燕云侍。</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/26/133.html"><div class="header"><i class="iconfont icon-file"></i>乙巳九月初六</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/129.html"><div class="header"><i class="iconfont icon-file"></i>(๑ت๑)</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/120.html"><div class="header"><i class="iconfont icon-file"></i>春雨南風</div><p class="ins-search-preview">@(taikaixin)</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/117.html"><div class="header"><i class="iconfont icon-file"></i>可是要记住啊</div><p class="ins-search-preview">啊可是要记住啊去做自己的事情还有理性的推理时间是演算的草稿逻辑呈现不变的径向 @(hehe)</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/22/115.html"><div class="header"><i class="iconfont icon-file"></i>书画处</div><p class="ins-search-preview">https://17.27.gs.cn</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/21/114.html"><div class="header"><i class="iconfont icon-file"></i>看秋</div></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/21/112.html"><div class="header"><i class="iconfont icon-file"></i>佩玉年刊</div><p class="ins-search-preview">https://27.gs.cn</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/2025/10/21/111.html"><div class="header"><i class="iconfont icon-file"></i>有我之表</div><p class="ins-search-preview">https://21277.27.gs.cn</p></div></section><section class="ins-section"><div class="ins-section-header">页面</div><div class="ins-selectable ins-search-item" data-url="/index.php/start-page.html"><div class="header"><i class="iconfont icon-file"></i>關於站點</div><p class="ins-search-preview">站點保留中華人民共和國及相關國際法律賦予的所有權利。詳見：佩玉廿七 (27.GS.CN) 網站法律聲明感謝為本站運行提供各項支持的產品。詳見：站點使用之致謝辛丑</p></div><div class="ins-selectable ins-search-item" data-url="/index.php/217.html"><div class="header"><i class="iconfont icon-file"></i>暖煙桃源</div></div></section><section class="ins-section"><div class="ins-section-header">分类</div><div class="ins-selectable ins-search-item" data-url="/index.php/category/97/"><div class="header"><i class="iconfont icon-folder"></i>南風<span class="ins-slug">97</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/27-gs-cn/"><div class="header"><i class="iconfont icon-folder"></i>祈安<span class="ins-slug">27-gs-cn</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/7721277/"><div class="header"><i class="iconfont icon-folder"></i>时祺<span class="ins-slug">7721277</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/77/"><div class="header"><i class="iconfont icon-folder"></i>春雨<span class="ins-slug">77</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/77777/"><div class="header"><i class="iconfont icon-folder"></i>畫兔<span class="ins-slug">77777</span></div></div><div class="ins-selectable ins-search-item" data-url="/index.php/category/1727/"><div class="header"><i class="iconfont icon-folder"></i>百靈<span class="ins-slug">1727</span></div></div></section></div></div></div></div>
+
+
+
+
+
+
+
+</body></html>
